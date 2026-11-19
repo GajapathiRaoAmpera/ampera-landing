@@ -9,6 +9,7 @@ import { Button } from "@/components/Button";
 import { Eyebrow } from "@/components/Eyebrow";
 import { TrustStrip } from "@/components/TrustStrip";
 import { Pipeline } from "@/components/Pipeline";
+import { Principles } from "@/components/Principles";
 import { Reveal } from "@/components/Reveal";
 import { StackLayers } from "@/components/StackLayers";
 import { Tag } from "@/components/Tag";
@@ -29,12 +30,25 @@ const steps = [
   ["Govern", "Human-in-the-loop controls, model evaluation, safety and compliance."],
   ["Operate", "MLOps and production deployment, with continuous support."],
 ];
-const principles = [
-  "AI-Driven Results",
-  "Business Delivery",
-  "Clear Communication",
-  "Built to Scale",
-  "Production Reliability",
+// Copy from the live amperatech.ai homepage.
+const principles: [string, string][] = [
+  [
+    "AI-Driven Results",
+    "We convert data signals into actionable strategies using AI and machine learning.",
+  ],
+  [
+    "Business Delivery",
+    "We align every solution to your goals, timelines, and measurable outcomes.",
+  ],
+  [
+    "Clear Communication",
+    "We simplify complexity and keep stakeholders aligned from start to launch.",
+  ],
+  ["Built to Scale", "We design secure, reliable systems that grow with your data and needs."],
+  [
+    "Production Reliability",
+    "We add monitoring and safeguards to keep AI systems accurate and dependable.",
+  ],
 ];
 const leaders = list("/about/leadership-team").map((l) => ({
   ...l,
@@ -112,7 +126,7 @@ export default function Home() {
         </div>
       </section>
 
-      <TrustStrip principles={principles} />
+      <TrustStrip />
 
       <section className="mx-auto max-w-6xl px-4 py-20">
         <Eyebrow>Agent catalog</Eyebrow>
@@ -171,11 +185,10 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-4">
           <Eyebrow>How we ship AI</Eyebrow>
           <Pipeline steps={steps} />
-          <ul className="mt-8 flex flex-wrap gap-2">
-            {principles.map((p) => (
-              <Tag key={p}>{p}</Tag>
-            ))}
-          </ul>
+          <h3 id="principles" className="mt-16 scroll-mt-24 text-xl font-normal text-navy">
+            Delivery principles
+          </h3>
+          <Principles items={principles} />
         </div>
       </section>
 

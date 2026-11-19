@@ -3,7 +3,6 @@ import { LuBadgeCheck } from "react-icons/lu";
 import { SiDatabricks, SiSnowflake } from "react-icons/si";
 import { img } from "@/lib/images";
 import { Eyebrow } from "@/components/Eyebrow";
-import { Marquee } from "@/components/Marquee";
 import { Reveal } from "@/components/Reveal";
 
 // Microsoft has no Simple Icons glyph; its mark is four squares.
@@ -22,8 +21,8 @@ const partners = [
   { name: "Snowflake", logo: <SiSnowflake aria-hidden className="size-7 text-[#29b5e8]" /> },
 ];
 
-// Trust band: ISO + partners once, then the delivery principles as a ticker.
-export function TrustStrip({ principles }: { principles: string[] }) {
+// Trust band: ISO certification + technology partners.
+export function TrustStrip() {
   return (
     <section
       aria-labelledby="trust-h"
@@ -96,9 +95,6 @@ export function TrustStrip({ principles }: { principles: string[] }) {
             </ul>
           </div>
         </div>
-      </div>
-      <div className="relative border-t border-black/10">
-        <Marquee items={principles} />
       </div>
     </section>
   );
