@@ -6,8 +6,10 @@ import type { Mesh } from "three";
 
 function Pyramid() {
   const ref = useRef<Mesh>(null);
-  useFrame((_, dt) => {
-    if (ref.current) ref.current.rotation.y += dt * 0.25;
+  useFrame(({ clock }, dt) => {
+    if (!ref.current) return;
+    ref.current.rotation.y += dt * 0.25;
+    ref.current.position.y = Math.sin(clock.elapsedTime * 0.8) * 0.12; // gentle float
   });
   return (
     // 4 radial segments = square pyramid

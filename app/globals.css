@@ -29,6 +29,7 @@ body {
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+    animation-delay: 0s !important;
     transition-duration: 0.01ms !important;
   }
 }
@@ -60,19 +61,32 @@ body {
   mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
 
-/* Blueprint grid behind the dark hero */
-@keyframes grid-drift {
-  to {
-    background-position: 48px 48px;
-  }
-}
+/* Blueprint grid behind the dark hero (static: motion is reserved for the content) */
 .blueprint {
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   background-size: 48px 48px;
-  animation: grid-drift 6s linear infinite;
   mask-image: radial-gradient(ellipse at 70% 40%, #000, transparent 70%);
+}
+
+/* Purple brand glow behind the console */
+.hero-glow {
+  background:
+    radial-gradient(40rem 32rem at 80% 35%, rgba(156, 54, 154, 0.35), transparent 70%),
+    radial-gradient(30rem 24rem at 10% 90%, rgba(0, 15, 92, 0.5), transparent 70%);
+}
+
+/* Staggered entrance; reduced-motion rule above collapses it to instant */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+.rise {
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+  animation-delay: calc(var(--i, 0) * 110ms);
 }
 
 /* Glass nav: light sheen over 60% ink; white text stays above 4.5:1 on ivory and dark sections */
@@ -82,4 +96,64 @@ body {
     rgba(5, 5, 5, 0.6);
   backdrop-filter: blur(20px) saturate(1.5);
   -webkit-backdrop-filter: blur(20px) saturate(1.5);
+}
+
+/* Agent console story (components/AgentConsole.tsx) */
+@keyframes pop {
+  from {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+}
+.pop {
+  animation: pop 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.4) backwards;
+}
+
+/* Terminal-style console: caret, spinner, line entrance */
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+.caret {
+  display: inline-block;
+  width: 0.55ch;
+  height: 1.1em;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  background: #f0abfc;
+  animation: blink 1s steps(1) infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(240, 171, 252, 0.3);
+  border-top-color: #f0abfc;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes line-in {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+}
+.line-in {
+  animation: line-in 0.4s ease-out backwards;
+}
+
+/* "See what we build" arrow nudge */
+@keyframes nudge {
+  50% {
+    transform: translateY(4px);
+  }
+}
+.scroll-cue {
+  display: inline-block;
+  animation: nudge 1.6s ease-in-out infinite;
 }

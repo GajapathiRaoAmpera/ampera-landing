@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { MediaIcon } from "./MediaIcon";
 
 // Slow proof-point ticker. Real text, pausable (WCAG 2.2.2); static when motion is reduced.
 export function Marquee({ items }: { items: string[] }) {
@@ -26,12 +27,12 @@ export function Marquee({ items }: { items: string[] }) {
       </div>
       <button
         type="button"
-        aria-pressed={paused}
         onClick={() => setPaused((p) => !p)}
-        className="min-h-8 shrink-0 rounded-pill border border-navy px-3 text-sm text-navy"
+        aria-label={paused ? "Play scrolling proof points" : "Pause scrolling proof points"}
+        title={paused ? "Play" : "Pause"}
+        className="grid size-11 shrink-0 place-items-center rounded-full text-navy hover:bg-navy/5"
       >
-        {paused ? "Play" : "Pause"}
-        <span className="sr-only"> scrolling proof points</span>
+        <MediaIcon kind={paused ? "play" : "pause"} />
       </button>
     </div>
   );

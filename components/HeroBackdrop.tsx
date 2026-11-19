@@ -43,7 +43,7 @@ export function HeroBackdrop() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute -left-24 top-1/2 size-[32rem] -translate-y-1/2 opacity-35"
+      className="pointer-events-none absolute -right-16 top-20 hidden size-[26rem] opacity-80 lg:block"
     >
       {animated ? <PyramidScene /> : <StaticPyramid />}
     </div>

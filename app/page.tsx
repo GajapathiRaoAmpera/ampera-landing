@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { coverFor, headshot, img } from "@/lib/images";
-import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { HeroBio } from "@/components/HeroBio";
+import { HeroLine } from "@/components/HeroLine";
 import { AgentConsole } from "@/components/AgentConsole";
 import { ServiceVisual } from "@/components/ServiceVisual";
 import { Button } from "@/components/Button";
@@ -42,35 +43,74 @@ const leaders = list("/about/leadership-team").map((l) => ({
 export default function Home() {
   return (
     <>
-      <section className="relative overflow-hidden bg-ink text-white">
+      {/* 1. Opening screen: tagline + the AI -> DNA animation, labelled with what we do. */}
+      <section
+        aria-label="Ampera"
+        className="relative flex h-[85svh] min-h-[34rem] flex-col items-center overflow-hidden bg-ink px-4 text-white sm:h-[100svh]"
+      >
+        <div aria-hidden className="hero-glow pointer-events-none absolute inset-0" />
         <div aria-hidden className="blueprint pointer-events-none absolute inset-0" />
-        <HeroBackdrop />
-        <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 pb-24 pt-40 lg:grid-cols-[1fr_1fr]">
+        <HeroBio />
+        <div className="relative mt-32 sm:mt-36">
+          <HeroLine />
+        </div>
+        {/* The 3D callouts are decorative; this gives the same "what we do" to screen readers. */}
+        <ul className="sr-only">
+          {services.map((s) => (
+            <li key={s.href}>{s.name}</li>
+          ))}
+        </ul>
+        <a
+          href="#hero"
+          className="relative mt-auto mb-8 inline-flex min-h-11 items-center gap-2 rounded-pill border border-white/40 px-5 text-sm hover:bg-white/10"
+        >
+          See what we build{" "}
+          <span aria-hidden className="scroll-cue">
+            ↓
+          </span>
+        </a>
+      </section>
+
+      {/* 2. Hero content: headline, CTAs and the agent console, revealed on scroll (Motion). */}
+      <section id="hero" className="relative scroll-mt-20 overflow-hidden bg-ink text-white">
+        <div aria-hidden className="hero-glow pointer-events-none absolute inset-0 opacity-60" />
+        <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 py-24 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
-            <Eyebrow dark>Advanced AI data intelligence</Eyebrow>
-            <h1 className="mt-6 max-w-3xl text-5xl font-light leading-tight sm:text-6xl">
-              We build AI agents and data platforms, with your team in the loop
-            </h1>
-            <p className="mt-6 max-w-2xl text-lg">
-              Our engineers design, build and run production-grade AI for your business: data
-              platforms, ML systems and agents, with people approving the decisions that matter and
-              accessibility by default.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
+            <Reveal>
+              <Eyebrow dark>Advanced AI data intelligence</Eyebrow>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h1 className="mt-6 max-w-3xl text-4xl font-light text-balance leading-[1.1] tracking-tight sm:text-5xl">
+                We build AI agents and data platforms, with your team{" "}
+                <span className="text-[#e9b3e7]">in the loop</span>
+              </h1>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-zinc-200">
+                Our engineers design, build and run production-grade AI for your business: data
+                platforms, ML systems and agents, with people approving the decisions that matter
+                and accessibility by default.
+              </p>
+            </Reveal>
+            <Reveal delay={0.3} className="mt-8 flex flex-wrap gap-4">
               <Button href="/contact">Book a demo</Button>
               <Button href="/accelerators" variant="secondary" dark>
                 Explore accelerators
               </Button>
-            </div>
-            <ul className="mt-10 flex flex-wrap gap-3 text-sm">
-              {["ISO certified", "Human-in-the-loop", "Accessibility by default"].map((b) => (
-                <li key={b} className="rounded-pill border border-white/40 px-3 py-1">
-                  {b}
-                </li>
-              ))}
-            </ul>
+            </Reveal>
+            <Reveal delay={0.4}>
+              <ul className="mt-10 flex flex-wrap gap-3 text-sm">
+                {["ISO certified", "Human-in-the-loop", "Accessibility by default"].map((b) => (
+                  <li key={b} className="rounded-pill border border-white/40 px-3 py-1">
+                    {b}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
           </div>
-          <AgentConsole />
+          <Reveal delay={0.2}>
+            <AgentConsole />
+          </Reveal>
         </div>
       </section>
 
