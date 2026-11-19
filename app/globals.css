@@ -42,3 +42,35 @@ body {
   stroke-dasharray: 5 3;
   animation: flow 1s linear infinite;
 }
+
+/* Proof-point ticker (components/Marquee.tsx) */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee 40s linear infinite;
+}
+.marquee-track:hover,
+.marquee-track[data-paused="true"] {
+  animation-play-state: paused;
+}
+.marquee-mask {
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+/* Blueprint grid behind the dark hero */
+@keyframes grid-drift {
+  to {
+    background-position: 48px 48px;
+  }
+}
+.blueprint {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  animation: grid-drift 6s linear infinite;
+  mask-image: radial-gradient(ellipse at 70% 40%, #000, transparent 70%);
+}

@@ -5,6 +5,10 @@ import { AgentConsole } from "@/components/AgentConsole";
 import { ServiceVisual } from "@/components/ServiceVisual";
 import { Button } from "@/components/Button";
 import { Eyebrow } from "@/components/Eyebrow";
+import { Marquee } from "@/components/Marquee";
+import { Pipeline } from "@/components/Pipeline";
+import { Reveal } from "@/components/Reveal";
+import { StackLayers } from "@/components/StackLayers";
 import { Tag } from "@/components/Tag";
 import { Cards } from "@/components/Cards";
 import { list } from "@/lib/listing";
@@ -39,6 +43,7 @@ export default function Home() {
   return (
     <>
       <section className="relative overflow-hidden bg-ink text-white">
+        <div aria-hidden className="blueprint pointer-events-none absolute inset-0" />
         <HeroBackdrop />
         <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 py-24 lg:grid-cols-[1fr_1fr]">
           <div>
@@ -84,6 +89,18 @@ export default function Home() {
         </div>
       </section>
 
+      <section aria-label="Proof points" className="border-b border-black/10">
+        <Marquee
+          items={[
+            "ISO certified (Intertek)",
+            "Microsoft partner",
+            "Databricks partner",
+            "Snowflake partner",
+            ...principles,
+          ]}
+        />
+      </section>
+
       <section className="mx-auto max-w-6xl px-4 py-20">
         <Eyebrow>Agent catalog</Eyebrow>
         <h2 className="mt-4 text-4xl font-normal text-purple">Accelerators you can deploy</h2>
@@ -127,30 +144,20 @@ export default function Home() {
 
       <section className="mx-auto max-w-6xl px-4 pb-20">
         <Eyebrow>Stack layers</Eyebrow>
-        <ol className="mt-6 space-y-2">
-          {layers.map((l) => (
-            <li key={l} className="rounded-xl border border-navy px-5 py-3 text-lg">
-              {l}
-            </li>
-          ))}
-        </ol>
-        <p className="mt-3 rounded-xl bg-purple px-5 py-3 text-lg text-white">
-          Digital Accessibility across every layer
-        </p>
+        <StackLayers
+          layers={layers.map((n) => {
+            const sv = services.find(
+              (x) => x.name.replace(/ ?\/ ?/g, "/") === n.replace(/ ?\/ ?/g, "/"),
+            )!;
+            return { name: sv.name, href: sv.href, chips: sv.tags.slice(0, 3) };
+          })}
+        />
       </section>
 
       <section className="bg-white py-20">
         <div className="mx-auto max-w-6xl px-4">
           <Eyebrow>How we ship AI</Eyebrow>
-          <ol className="mt-8 grid gap-6 md:grid-cols-4">
-            {steps.map(([t, d], i) => (
-              <li key={t}>
-                <p className="font-mono text-sm text-navy">0{i + 1}</p>
-                <h3 className="mt-1 text-2xl font-medium text-purple">{t}</h3>
-                <p className="mt-2">{d}</p>
-              </li>
-            ))}
-          </ol>
+          <Pipeline steps={steps} />
           <ul className="mt-8 flex flex-wrap gap-2">
             {principles.map((p) => (
               <Tag key={p}>{p}</Tag>

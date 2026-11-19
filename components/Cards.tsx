@@ -27,7 +27,7 @@ export function Cards({ items, label }: { items: Item[]; label: string }) {
                 {i.title}
               </Link>
             </h3>
-            <p className="mt-2">{i.summary}</p>
+            <p className="mt-2 line-clamp-5">{i.summary}</p>
           </div>
         </li>
       ))}

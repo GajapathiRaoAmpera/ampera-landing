@@ -16,7 +16,7 @@ const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name}: AI agents that turn your data into decisions`,
+    default: `${site.name}: AI agents and data platforms, with your team in the loop`,
     template: `%s | ${site.name}`,
   },
   description: site.description,

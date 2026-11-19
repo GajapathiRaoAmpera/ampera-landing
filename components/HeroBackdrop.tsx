@@ -23,7 +23,7 @@ function StaticPyramid() {
       width={836}
       height={470}
       priority
-      className="h-full w-full object-contain mix-blend-screen"
+      className="h-full w-full object-contain mix-blend-screen [mask-image:radial-gradient(closest-side,#000_55%,transparent)]"
     />
   );
 }
