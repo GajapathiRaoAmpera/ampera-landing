@@ -36,10 +36,21 @@ const EMPLOYMENT = {
 };
 const PERIOD: Record<string, string> = { year: "YEAR", month: "MONTH", hour: "HOUR" };
 
+function jsonLd(o: OpeningDetail) {
+  const crumbs = {
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: site.url },
+      { "@type": "ListItem", position: 2, name: "Careers", item: `${site.url}/careers` },
+      { "@type": "ListItem", position: 3, name: o.title, item: `${site.url}/careers/${o.slug}` },
+    ],
+  };
+  return { "@context": "https://schema.org", "@graph": [crumbs, jobPosting(o)] };
+}
+
 function jobPosting(o: OpeningDetail) {
   const remote = o.workplace === "remote";
   return {
-    "@context": "https://schema.org",
     "@type": "JobPosting",
     title: o.title,
     description: o.description,
@@ -104,7 +115,7 @@ export default async function Opening({ params }: Props) {
       {/* "<" escaped so API-supplied text can never close the script tag */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jobPosting(o)).replace(/</g, "\\u003c") }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd(o)).replace(/</g, "\\u003c") }}
       />
     </div>
   );

@@ -12,6 +12,20 @@ export const metadata: Metadata = {
   description:
     "Open roles at Ampera Technologies. Join a team building production-grade AI agents and accessible digital experiences.",
   alternates: { canonical: "/careers" },
+  openGraph: {
+    title: "Careers at Ampera Technologies",
+    description: "Open roles at Ampera Technologies. Anyone can apply.",
+    url: "/careers",
+  },
+};
+
+const crumbsLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: site.url },
+    { "@type": "ListItem", position: 2, name: "Careers", item: `${site.url}/careers` },
+  ],
 };
 
 export default async function Careers() {
@@ -47,9 +61,7 @@ export default async function Careers() {
           {openings.map((o) => (
             <li key={o.id} className={s.card}>
               <h2 className={s.cardTitle}>
-                <Link href={`/careers/${o.slug}`}>
-                  {o.title}
-                </Link>
+                <Link href={`/careers/${o.slug}`}>{o.title}</Link>
               </h2>
               <p className={s.meta}>{meta(o).join(" · ")}</p>
               <p className={s.mt2}>{o.summary}</p>
@@ -61,6 +73,10 @@ export default async function Careers() {
       <p className={s.body}>
         Campus drives are by invitation only. Students: please contact your college placement cell.
       </p>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbsLd) }}
+      />
     </div>
   );
 }

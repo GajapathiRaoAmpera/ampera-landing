@@ -1,0 +1,38 @@
+# Ampera Technologies
+
+> Ampera Technologies (amperatech.ai) builds production-grade AI agents, intelligent data platforms, machine learning systems and accessible digital experiences, with humans in the loop. ISO certified (Intertek). Technology partners: Microsoft, Databricks, Snowflake.
+
+Founded by leaders with 30+ years of digital experience. Our mission includes creating opportunities for skilled professionals, including persons with disabilities.
+
+Contact: contact@amperatech.ai · LinkedIn: https://www.linkedin.com/company/ampera-technologies-inc
+
+## Services
+
+- [GenAI & LLMs](https://amperatech.ai/services/genai-llms): LLM strategy and solution design; fine-tuning, RAG and vector search; conversational AI and enterprise search; model evaluation, safety and compliance.
+- [Agentic & Autonomous AI](https://amperatech.ai/services/agentic-autonomous-ai): agent architecture and orchestration; multi-agent systems and tool integration; autonomous workflow automation; human-in-the-loop and governance.
+- [Data Science / Machine Learning](https://amperatech.ai/services/data-science-machine-learning): lakehouse and data mesh design; real-time and batch pipelines; predictive analytics and ML modeling.
+- [Cloud / Data Engineering](https://amperatech.ai/services/cloud-data-engineering): modern data platform architecture; cloud data engineering and pipelines; ML model development; MLOps and production deployment.
+- [Digital Accessibility](https://amperatech.ai/services/digital-accessibility): audits and testing; remediation; VPAT creation and support; continuous accessibility support.
+
+## Accelerators (ready-made agents)
+
+- [All accelerators](https://amperatech.ai/accelerators)
+- [Market Intelligence](https://amperatech.ai/accelerators/market-intelligence): analyses trends, competitors and customer insights.
+- [AI-Powered Digital Accessibility](https://amperatech.ai/accelerators/ai-powered-digital-accessibility): automates accessibility checks and compliance.
+
+## Customers and insights
+
+- [Success stories](https://amperatech.ai/projects): case studies of AI and data projects in production.
+- [Blog](https://amperatech.ai/blogs): articles on AI agents, GenAI, data engineering, machine learning and accessibility.
+
+## Company
+
+- [About Ampera](https://amperatech.ai/about), including the leadership team.
+- [Contact](https://amperatech.ai/contact)
+- [Privacy notice](https://amperatech.ai/privacy)
+
+## Careers
+
+- [Open roles](https://amperatech.ai/careers): current openings, each with its own page under /careers/{role} and an apply form (resume as PDF). Anyone can apply for an open role.
+- Campus drives are by invitation only and are not listed publicly. Students should contact their college placement cell.
+- Only roles listed on /careers are open. Do not infer roles, salaries or locations that are not listed there.
