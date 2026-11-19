@@ -1,7 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { useInView, useReducedMotion } from "@/lib/hooks";
 import { hasWebGL } from "@/lib/webgl";
 import { cx } from "@/lib/cx";
 import s from "./StackLayers.module.scss";
@@ -15,7 +15,7 @@ const ALL = -1; // "Digital Accessibility": every layer at once
 // Layered architecture: a highlight climbs L1 → L4 while in view (data building up the stack),
 // pauses on hover/focus, and the 3D stack mirrors it. Reduced motion: no auto-cycle, no slide.
 export function StackLayers({ layers }: { layers: Layer[] }) {
-  const reduce = !!useReducedMotion();
+  const reduce = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { margin: "-20% 0px" });
   const near = useInView(ref, { once: true, margin: "400px 0px" }); // don't fetch three.js until close
@@ -69,15 +69,7 @@ export function StackLayers({ layers }: { layers: Layer[] }) {
             const p = plate(i);
             return (
               <li key={l.name} {...bind(p)} className={s.row}>
-                {active === p && (
-                  <motion.div
-                    layoutId="layer-highlight"
-                    transition={
-                      reduce ? { duration: 0 } : { type: "spring", stiffness: 260, damping: 30 }
-                    }
-                    className={s.highlight}
-                  />
-                )}
+                {active === p && <div className={s.highlight} />}
                 <span aria-hidden className={cx(s.level, on(p) && s.on)}>
                   L{p + 1}
                 </span>

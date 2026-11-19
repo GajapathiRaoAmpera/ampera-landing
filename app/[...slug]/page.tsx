@@ -91,7 +91,7 @@ export default async function ContentPage({ params }: Props) {
           <div className={s.visual}>
             <ServiceVisual href={page.path} />
           </div>
-          <Prose>{page.body.split("\n\n").slice(2).join("\n\n")}</Prose>
+          <Prose after={1}>{page.body.split("\n\n").slice(2).join("\n\n")}</Prose>
         </>
       ) : (
         <Prose>{page.body}</Prose>
@@ -115,10 +115,11 @@ export default async function ContentPage({ params }: Props) {
         );
       })()}
       {["/projects", "/blogs"].includes(page.path) && (
-        <Cards label={page.title} items={list(page.path)} />
+        <Cards label={page.title} items={list(page.path)} heading="h2" />
       )}
       {page.path === "/accelerators" && (
         <Cards
+          heading="h2"
           label="Accelerators"
           items={[...list("/accelerators"), ...list("/sub-accelerators")]}
         />

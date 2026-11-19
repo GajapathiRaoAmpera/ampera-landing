@@ -14,6 +14,12 @@
   }
 }
 
+// Off-screen cards skip style, layout, paint and their looping art animations (listing pages have 14+).
+.item {
+  content-visibility: auto;
+  contain-intrinsic-block-size: auto 26rem; // height only: a width placeholder would overflow on phones
+}
+
 .full {
   height: 100%;
 }

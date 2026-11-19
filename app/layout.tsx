@@ -11,7 +11,8 @@ const switzer = localFont({
   variable: "--font-switzer",
   weight: "100 900",
 });
-const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains" });
+// Not preloaded: mono is only used below the fold, so it must not compete with the hero text.
+const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains", preload: false });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),

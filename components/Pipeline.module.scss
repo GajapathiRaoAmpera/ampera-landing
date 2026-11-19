@@ -1,8 +1,29 @@
+@use "sass:math";
 @use "../styles/tokens" as *;
 
+// Scroll progress through the pipeline drives the rail and the dots (named view timeline).
 .pipeline {
   position: relative;
   margin-top: 2.5rem;
+  view-timeline: --pipeline block;
+}
+
+$range: entry 60% cover 65%;
+
+@mixin on-scroll($name) {
+  @supports (animation-timeline: view()) {
+    @include motion-ok {
+      animation: $name linear both;
+      animation-timeline: --pipeline;
+      animation-range: $range;
+    }
+  }
+}
+
+@keyframes rail-fill {
+  from {
+    scale: 0 1;
+  }
 }
 
 .rail {
@@ -22,6 +43,7 @@
   height: 100%;
   transform-origin: left;
   background: $purple;
+  @include on-scroll(rail-fill);
 }
 
 .steps {
@@ -47,6 +69,29 @@
   margin-bottom: 1rem;
   border: 2px solid $purple;
   border-radius: 50%;
+  background: $purple;
+}
+
+// Dot n lights when the rail fill reaches it (steps are evenly spaced; 4 in lib/home.ts).
+$steps: 4;
+@for $n from 1 through $steps {
+  $at: math.div($n - 1, $steps - 1) * 100%;
+
+  @keyframes dot-#{$n} {
+    0%,
+    #{math.max($at - 5%, 0%)} {
+      background: $white;
+    }
+
+    #{$at},
+    100% {
+      background: $purple;
+    }
+  }
+
+  .step:nth-child(#{$n}) .dot {
+    @include on-scroll(dot-#{$n});
+  }
 }
 
 .card {

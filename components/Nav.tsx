@@ -15,8 +15,8 @@ export function Nav() {
           <Image
             src="/brand/ampera-logo.png"
             alt="Ampera"
-            width={810}
-            height={226}
+            width={129}
+            height={36}
             priority
             className={s.logo}
           />

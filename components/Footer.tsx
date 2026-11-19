@@ -51,8 +51,8 @@ export function Footer() {
               <Image
                 src="/brand/ampera-logo.png"
                 alt="Ampera"
-                width={810}
-                height={226}
+                width={143}
+                height={40}
                 className={s.logo}
               />
             </Link>

@@ -1,8 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Resume PDFs go through a server action (limit 5 MB + form fields).
-  experimental: { serverActions: { bodySizeLimit: "6mb" } },
+  experimental: {
+    // Resume PDFs go through a server action (limit 5 MB + form fields).
+    serverActions: { bodySizeLimit: "6mb" },
+    // CSS is small (~10 KB); inlining removes the render-blocking stylesheet requests.
+    inlineCss: true,
+  },
 };
 
 export default nextConfig;

@@ -95,7 +95,7 @@ Titles and bios: pull them from the current `/about/leadership-team/*` pages.
 - SCSS (Sass) with CSS Modules: brand tokens and mixins in `styles/_tokens.scss`, one `*.module.scss` per component, shared base/utilities/keyframes in `styles/` (loaded by `app/globals.scss`). No Tailwind.
 - `next/font/local` for Switzer; `next/font/google` for the mono font
 - React Three Fiber + drei for the 3D hero only
-- Framer Motion (the animation library) for scroll and UI animation
+- Animation in CSS: scroll-driven animations (`animation-timeline: view()`) for reveals and the pipeline, keyframes in `styles/_animations.scss`. No animation library (framer-motion was removed to cut homepage JavaScript).
 - A content management system (CMS) for blogs, case studies, team and accelerators (Sanity or Payload: undecided). Start with local MDX/JSON content and swap in the CMS later.
 - Contact form: server action + Resend (or similar)
 - Hosting: Vercel. The repo is owned by a company GitHub account.

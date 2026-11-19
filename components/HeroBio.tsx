@@ -1,6 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
-import { useInView, useReducedMotion } from "framer-motion";
+import { useInView, useReducedMotion } from "@/lib/hooks";
 import { hasWebGL } from "@/lib/webgl";
 import { useEffect, useRef, useState } from "react";
 import { cx } from "@/lib/cx";

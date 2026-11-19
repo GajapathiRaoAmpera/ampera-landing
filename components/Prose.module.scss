@@ -1,7 +1,9 @@
 @use "../styles/tokens" as *;
 
+// Headings are styled by their original markdown level (`look-N`, set in Prose.tsx), not their tag.
+
 .prose {
-  h1 {
+  :global(.look-1) {
     color: $purple;
     @include text(4xl);
     font-weight: 300;
@@ -11,27 +13,27 @@
     }
   }
 
-  h2 {
+  :global(.look-2) {
     margin-top: 3rem;
     color: $purple;
     @include text(3xl);
     font-weight: 400;
   }
 
-  h3 {
+  :global(.look-3) {
     margin-top: 2rem;
     @include text(2xl);
     font-weight: 500;
   }
 
-  h4 {
+  :global(.look-4) {
     margin-top: 1.5rem;
     color: $navy;
     @include text(lg);
     font-weight: 500;
   }
 
-  h5 {
+  :global(.look-5) {
     margin-top: 1rem;
     font-weight: 500;
   }

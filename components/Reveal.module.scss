@@ -1,9 +1,9 @@
 @use "../styles/tokens" as *;
 
+// Slide only, no fade: text is never shown at partial opacity (WCAG contrast while scrolling).
 @keyframes reveal {
   from {
-    opacity: 0;
-    translate: 0 24px;
+    translate: 0 32px;
   }
 }
 
