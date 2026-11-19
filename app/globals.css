@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+@theme {
+  --color-purple: #9c369a;
+  --color-navy: #000f5c;
+  --color-ivory: #fffefa;
+  --color-ink: #050505;
+  --color-grey: #969696; /* muted decoration only: fails 4.5:1 on ivory */
+  --font-sans: var(--font-switzer), system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, monospace;
+  --radius-pill: 60px;
+}
+
+body {
+  background: var(--color-ivory);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-weight: 400;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-navy);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
