@@ -7,7 +7,7 @@ import { AgentConsole } from "@/components/AgentConsole";
 import { ServiceVisual } from "@/components/ServiceVisual";
 import { Button } from "@/components/Button";
 import { Eyebrow } from "@/components/Eyebrow";
-import { Marquee } from "@/components/Marquee";
+import { TrustStrip } from "@/components/TrustStrip";
 import { Pipeline } from "@/components/Pipeline";
 import { Reveal } from "@/components/Reveal";
 import { StackLayers } from "@/components/StackLayers";
@@ -112,32 +112,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section aria-label="Built on" className="border-b border-black/10 bg-white">
-        <div className="mx-auto flex max-w-6xl items-center justify-center gap-4 px-4 py-6">
-          <Image
-            src={img.iso}
-            width={56}
-            height={69}
-            alt="ISO 27001 certification mark, Intertek"
-          />
-          <p className="text-base">
-            ISO certified (Intertek) · Technology partners: Microsoft, Databricks, Snowflake
-          </p>
-          <Image src={img.microsoft} width={110} height={30} alt="Microsoft" className="rounded" />
-        </div>
-      </section>
-
-      <section aria-label="Proof points" className="border-b border-black/10">
-        <Marquee
-          items={[
-            "ISO certified (Intertek)",
-            "Microsoft partner",
-            "Databricks partner",
-            "Snowflake partner",
-            ...principles,
-          ]}
-        />
-      </section>
+      <TrustStrip principles={principles} />
 
       <section className="mx-auto max-w-6xl px-4 py-20">
         <Eyebrow>Agent catalog</Eyebrow>
