@@ -125,6 +125,13 @@ body {
   }
 }
 
+/* Below-the-fold sections (app/page.tsx): the browser skips their style, layout, paint and infinite
+   animations until they near the viewport. Content stays in the DOM and accessibility tree. */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
 /* Stack layers rail (components/StackLayers.tsx): data dots climb L1 -> L4; hidden when motion is reduced */
 @keyframes rail-flow {
   0% {

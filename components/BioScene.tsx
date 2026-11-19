@@ -126,7 +126,7 @@ export default function BioScene({ animate }: { animate: boolean }) {
   return (
     <Canvas
       frameloop={animate ? "always" : "demand"}
-      dpr={[1, 2]}
+      dpr={[1, 1.5]}
       camera={{ position: [0, 0, 8], fov: 35 }}
       gl={{ alpha: true, antialias: true }}
     >

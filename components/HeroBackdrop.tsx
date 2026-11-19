@@ -1,18 +1,12 @@
 "use client";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import { hasWebGL } from "@/lib/webgl";
 import { useEffect, useState } from "react";
 
 // Three.js only loads on demand, so it never blocks the HTML/text.
 const PyramidScene = dynamic(() => import("./PyramidScene"), { ssr: false });
 
-function hasWebGL() {
-  try {
-    return !!document.createElement("canvas").getContext("webgl2");
-  } catch {
-    return false;
-  }
-}
 
 // Static pyramid: server-rendered default and the reduced-motion / no-WebGL fallback.
 function StaticPyramid() {

@@ -1,6 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
-import { useReducedMotion } from "framer-motion";
+import { useInView, useReducedMotion } from "framer-motion";
+import { hasWebGL } from "@/lib/webgl";
 import { useEffect, useRef, useState } from "react";
 
 // Three.js loads on demand, so it never blocks the HTML.
@@ -18,13 +19,6 @@ const SERVICES = [
 // BioScene camera: z=8, fov 35 -> world height visible at z=0.
 const VIEW_H = 2 * 8 * Math.tan((17.5 * Math.PI) / 180);
 
-function hasWebGL() {
-  try {
-    return !!document.createElement("canvas").getContext("webgl2");
-  } catch {
-    return false;
-  }
-}
 
 // Decoration only: hidden from assistive tech (the page has an sr-only list of the services).
 export function HeroBio() {
@@ -32,6 +26,7 @@ export function HeroBio() {
   const [gl, setGl] = useState(false);
   const [box, setBox] = useState<{ w: number; h: number } | null>(null);
   const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref); // stop the render loop once scrolled past
 
   useEffect(() => {
     const id = requestAnimationFrame(() => setGl(hasWebGL()));
@@ -59,7 +54,7 @@ export function HeroBio() {
       aria-hidden
       className="pointer-events-none absolute inset-x-0 top-1/3 bottom-16 isolate"
     >
-      {gl && <BioScene animate={!reduce} />}
+      {gl && <BioScene animate={!reduce && inView} />}
       {gl &&
         box &&
         SERVICES.map((c, i) => (

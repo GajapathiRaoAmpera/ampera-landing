@@ -2,6 +2,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
+import { hasWebGL } from "@/lib/webgl";
 
 // Three.js loads on demand, after the HTML list is already readable.
 const StackScene = dynamic(() => import("./StackScene"), { ssr: false });
@@ -15,16 +16,14 @@ export function StackLayers({ layers }: { layers: Layer[] }) {
   const reduce = !!useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { margin: "-20% 0px" });
+  const near = useInView(ref, { once: true, margin: "400px 0px" }); // don't fetch three.js until close
   const [user, setUser] = useState<number | null>(null);
   const [auto, setAuto] = useState(0);
   const [gl, setGl] = useState(false);
 
   useEffect(() => {
     const mq = matchMedia("(min-width: 1024px)");
-    let webgl = false;
-    try {
-      webgl = !!document.createElement("canvas").getContext("webgl2");
-    } catch {}
+    const webgl = hasWebGL();
     const update = () => setGl(mq.matches && webgl);
     update();
     mq.addEventListener("change", update);
@@ -119,7 +118,7 @@ export function StackLayers({ layers }: { layers: Layer[] }) {
       </div>
       <div aria-hidden className="relative hidden h-[32rem] lg:block">
         <div className="absolute inset-10 rounded-full bg-purple/25 blur-3xl" />
-        {gl && <StackScene active={active} still={reduce} />}
+        {gl && near && <StackScene active={active} still={reduce || !inView} />}
       </div>
     </div>
   );

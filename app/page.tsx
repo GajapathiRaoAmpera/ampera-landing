@@ -166,7 +166,7 @@ export default function Home() {
 
       <TrustStrip principles={principles} />
 
-      <section className="mx-auto max-w-6xl px-4 py-20">
+      <section className="cv-auto mx-auto max-w-6xl px-4 py-20">
         <Eyebrow>Agent catalog</Eyebrow>
         <h2 className="mt-4 text-4xl font-normal text-purple">Accelerators you can deploy</h2>
         {/* One uniform grid: every card the same size; suites are the dark cards. */}
@@ -217,7 +217,7 @@ export default function Home() {
         </ul>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 pb-20">
+      <section className="cv-auto mx-auto max-w-6xl px-4 pb-20">
         <Eyebrow>Platform stack</Eyebrow>
         <h2 className="mt-4 text-4xl font-normal text-purple">Five services, one platform</h2>
         <ul className="mt-10 grid gap-6 md:grid-cols-2">
@@ -261,7 +261,7 @@ export default function Home() {
         </ul>
       </section>
 
-      <section className="relative overflow-hidden bg-ink py-24 text-white">
+      <section className="cv-auto relative overflow-hidden bg-ink py-24 text-white">
         <div aria-hidden className="blueprint pointer-events-none absolute inset-0" />
         <div aria-hidden className="hero-glow pointer-events-none absolute inset-0 opacity-50" />
         <div className="relative mx-auto max-w-6xl px-4">
@@ -277,7 +277,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-white py-20">
+      <section className="cv-auto bg-white py-20">
         <div className="mx-auto max-w-6xl px-4">
           <Eyebrow>How we ship AI</Eyebrow>
           <Pipeline steps={steps} />
@@ -289,7 +289,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-20">
+      <section className="cv-auto mx-auto max-w-6xl px-4 py-20">
         <Eyebrow>Agents in production</Eyebrow>
         <h2 className="mt-4 text-4xl font-normal text-purple">Success stories</h2>
         <Cards label="Case studies" items={list("/projects")} />
@@ -300,7 +300,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-white py-20">
+      <section className="cv-auto bg-white py-20">
         <div className="mx-auto max-w-6xl px-4">
           <Eyebrow>Who we are</Eyebrow>
           <h2 className="mt-4 text-4xl font-normal text-purple">
@@ -346,7 +346,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-ink py-20 text-white">
+      <section className="cv-auto bg-ink py-20 text-white">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="text-4xl font-light">Put your first AI system into production</h2>
           {/* TODO: work-email form (server action + Resend) once approved; link for now. */}
