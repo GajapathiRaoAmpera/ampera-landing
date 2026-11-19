@@ -120,7 +120,8 @@ export function AgentConsole() {
         );
       })}
       <p className="border-t border-white/15 px-5 py-3 text-sm text-zinc-300">
-        Illustrative example of an agent our team builds for clients, with a person approving key steps. Not live data.
+        Illustrative example of an agent our team builds for clients, with a person approving key
+        steps. Not live data.
       </p>
     </section>
   );

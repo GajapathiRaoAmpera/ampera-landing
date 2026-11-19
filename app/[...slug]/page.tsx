@@ -5,6 +5,8 @@ import { Prose } from "@/components/Prose";
 import { Cards } from "@/components/Cards";
 import { getPage, paths } from "@/lib/content";
 import { list } from "@/lib/listing";
+import Image from "next/image";
+import { coverFor, headshot } from "@/lib/images";
 import { site } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string[] }> };
@@ -75,6 +77,16 @@ export default async function ContentPage({ params }: Props) {
       {page.path.startsWith("/services/") ? (
         <>
           <Prose>{page.body.split("\n\n").slice(0, 2).join("\n\n")}</Prose>
+          {coverFor(page.path) && (
+            <Image
+              src={coverFor(page.path)!}
+              width={1200}
+              height={675}
+              sizes="(min-width: 1152px) 1088px, 100vw"
+              alt=""
+              className="mt-8 aspect-video max-h-96 w-full rounded-2xl object-cover"
+            />
+          )}
           <div className="mt-8">
             <ServiceVisual href={page.path} />
           </div>
@@ -83,6 +95,24 @@ export default async function ContentPage({ params }: Props) {
       ) : (
         <Prose>{page.body}</Prose>
       )}
+      {(() => {
+        const src = page.path.startsWith("/about/leadership-team/")
+          ? headshot(page.path)
+          : page.path.startsWith("/services/")
+            ? null // shown above, before the diagram
+            : coverFor(page.path);
+        return (
+          src && (
+            <Image
+              src={src}
+              width={900}
+              height={600}
+              alt=""
+              className="mt-8 max-h-96 w-auto rounded-2xl object-cover"
+            />
+          )
+        );
+      })()}
       {["/projects", "/blogs"].includes(page.path) && (
         <Cards label={page.title} items={list(page.path)} />
       )}

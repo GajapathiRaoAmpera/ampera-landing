@@ -1,5 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 // Three.js only loads on demand, so it never blocks the HTML/text.
@@ -16,24 +17,14 @@ function hasWebGL() {
 // Static pyramid: server-rendered default and the reduced-motion / no-WebGL fallback.
 function StaticPyramid() {
   return (
-    <svg viewBox="0 0 200 200" className="h-full w-full">
-      <defs>
-        <radialGradient id="glow" cx="50%" cy="55%" r="50%">
-          <stop offset="0" stopColor="#9c369a" stopOpacity="0.55" />
-          <stop offset="1" stopColor="#9c369a" stopOpacity="0" />
-        </radialGradient>
-      </defs>
-      <circle cx="100" cy="110" r="90" fill="url(#glow)" />
-      <polygon points="100,30 40,150 100,170" fill="#9c369a" />
-      <polygon points="100,30 100,170 165,145" fill="#6f2570" />
-      <polygon
-        points="100,30 40,150 100,170 165,145"
-        fill="none"
-        stroke="#e9b3e7"
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
-    </svg>
+    <Image
+      src="/images/home/8ugqiHw4GzdL44wjNwOob1KfLEU.png"
+      alt=""
+      width={836}
+      height={470}
+      priority
+      className="h-full w-full object-contain mix-blend-screen"
+    />
   );
 }
 

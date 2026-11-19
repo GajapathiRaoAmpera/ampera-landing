@@ -1,3 +1,5 @@
+import Image from "next/image";
+import { coverFor, headshot, img } from "@/lib/images";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { AgentConsole } from "@/components/AgentConsole";
 import { ServiceVisual } from "@/components/ServiceVisual";
@@ -45,8 +47,9 @@ export default function Home() {
               We build AI agents and data platforms, with your team in the loop
             </h1>
             <p className="mt-6 max-w-2xl text-lg">
-              Our engineers design, build and run production-grade AI for your business: data platforms,
-              ML systems and agents, with people approving the decisions that matter and accessibility by default.
+              Our engineers design, build and run production-grade AI for your business: data
+              platforms, ML systems and agents, with people approving the decisions that matter and
+              accessibility by default.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Button href="/contact">Book a demo</Button>
@@ -67,9 +70,18 @@ export default function Home() {
       </section>
 
       <section aria-label="Built on" className="border-b border-black/10 bg-white">
-        <p className="mx-auto max-w-6xl px-4 py-6 text-center text-base">
-          ISO certified (Intertek) · Technology partners: Microsoft, Databricks, Snowflake
-        </p>
+        <div className="mx-auto flex max-w-6xl items-center justify-center gap-4 px-4 py-6">
+          <Image
+            src={img.iso}
+            width={56}
+            height={69}
+            alt="ISO 27001 certification mark, Intertek"
+          />
+          <p className="text-base">
+            ISO certified (Intertek) · Technology partners: Microsoft, Databricks, Snowflake
+          </p>
+          <Image src={img.microsoft} width={110} height={30} alt="Microsoft" className="rounded" />
+        </div>
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-20">
@@ -87,6 +99,16 @@ export default function Home() {
         <ul className="mt-10 grid gap-6 md:grid-cols-2">
           {services.map((s) => (
             <li key={s.href} className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-black/5">
+              {coverFor(s.href) && (
+                <Image
+                  src={coverFor(s.href)!}
+                  width={640}
+                  height={360}
+                  sizes="(min-width: 768px) 520px, 100vw"
+                  alt=""
+                  className="mb-4 aspect-video w-full rounded-xl object-cover"
+                />
+              )}
               <ServiceVisual href={s.href} />
               <h3 className="text-xl font-medium">
                 <a className="hover:underline" href={s.href}>
@@ -159,13 +181,32 @@ export default function Home() {
             opportunities for skilled professionals, including persons with disabilities, and it is
             why accessibility is built into everything we ship.
           </p>
+          <Image
+            src={img.team}
+            width={1200}
+            height={798}
+            sizes="(min-width: 1152px) 1088px, 100vw"
+            alt=""
+            className="mt-8 h-64 w-full rounded-2xl object-cover"
+          />
           <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {leaders.map((l) => (
-              <li key={l.path}>
-                <a className="font-medium hover:underline" href={l.path}>
-                  {l.title}
-                </a>
-                <p>{l.role}</p>
+              <li key={l.path} className="flex items-center gap-4">
+                {headshot(l.path) && (
+                  <Image
+                    src={headshot(l.path)!}
+                    width={64}
+                    height={64}
+                    alt=""
+                    className="size-16 rounded-full object-cover object-[50%_25%]"
+                  />
+                )}
+                <div>
+                  <a className="font-medium hover:underline" href={l.path}>
+                    {l.title}
+                  </a>
+                  <p>{l.role}</p>
+                </div>
               </li>
             ))}
           </ul>
