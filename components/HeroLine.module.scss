@@ -1,0 +1,32 @@
+@use "../styles/tokens" as *;
+
+.wrap {
+  text-align: center;
+}
+
+.line {
+  @include text(4xl);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+
+  @include up(sm) {
+    @include text(6xl);
+  }
+}
+
+.word {
+  display: inline-block;
+}
+
+.accent {
+  background: linear-gradient(to right, $purple-light, $fuchsia-400);
+  background-clip: text;
+  color: transparent;
+}
+
+.sub {
+  max-width: 36rem;
+  margin: 1.25rem auto 0;
+  color: $zinc-200;
+  @include text(lg);
+}

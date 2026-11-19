@@ -1,0 +1,97 @@
+@use "../styles/tokens" as *;
+
+.pipeline {
+  position: relative;
+  margin-top: 2.5rem;
+}
+
+.rail {
+  position: absolute;
+  inset-inline: 0;
+  top: 7px;
+  display: none;
+  height: 1px;
+  background: rgba($navy, 0.2);
+
+  @include up(md) {
+    display: block;
+  }
+}
+
+.fill {
+  height: 100%;
+  transform-origin: left;
+  background: $purple;
+}
+
+.steps {
+  display: grid;
+  gap: 2rem;
+
+  @include up(md) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+}
+
+.dot {
+  position: relative;
+  z-index: 10;
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  margin-bottom: 1rem;
+  border: 2px solid $purple;
+  border-radius: 50%;
+}
+
+.card {
+  position: relative;
+  flex: 1;
+  padding: 1.25rem;
+  border: 1px solid rgb(0 0 0 / 0.1);
+  border-radius: $r-2xl;
+  background: $ivory;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.icon {
+  @include icon-tile;
+
+  svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .card:hover & {
+    background: $purple;
+    color: $white;
+  }
+}
+
+.num {
+  color: $navy;
+  font-family: $font-mono;
+  @include text(sm);
+}
+
+.title {
+  margin-top: 1rem;
+  color: $purple;
+  @include text(2xl);
+  font-weight: 500;
+}
+
+.body {
+  margin-top: 0.5rem;
+  color: $zinc-700;
+}

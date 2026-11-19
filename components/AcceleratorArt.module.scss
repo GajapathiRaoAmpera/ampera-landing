@@ -1,0 +1,20 @@
+@use "../styles/tokens" as *;
+
+.art {
+  position: relative;
+  height: 10rem;
+  overflow: hidden;
+  background: $ink;
+}
+
+.glow {
+  @include cover;
+  background: radial-gradient(70% 90% at 50% 40%, rgba($purple, 0.35), transparent 70%);
+}
+
+.svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}

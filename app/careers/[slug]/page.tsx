@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import s from "@/styles/page.module.scss";
 import { notFound } from "next/navigation";
 import { ApplyForm } from "@/components/ApplyForm";
 import { getOpening, getOpenings } from "@/lib/campus-hire/client";
@@ -82,21 +83,21 @@ export default async function Opening({ params }: Props) {
   const o = await getOpening((await params).slug);
   if (!o) notFound(); // closed jobs must 404 so they drop out of Google
   return (
-    <div className="mx-auto grid max-w-6xl gap-12 px-4 pb-16 pt-28 lg:grid-cols-[3fr_2fr]">
+    <div className={`${s.page} ${s.job}`}>
       <article>
-        <h1 className="text-4xl font-light text-purple sm:text-5xl">{o.title}</h1>
-        <p className="mt-3 text-lg text-navy">{meta(o).join(" · ")}</p>
-        <p className="mt-1">
+        <h1 className={s.title}>{o.title}</h1>
+        <p className={s.jobMeta}>{meta(o).join(" · ")}</p>
+        <p className={s.meta}>
           Posted {fmtDate(o.posted_at)}
           {o.closes_at && <> · Apply by {fmtDate(o.closes_at)}</>}
         </p>
-        <div className="mt-6 whitespace-pre-line text-lg leading-relaxed">{o.description}</div>
+        <div className={s.description}>{o.description}</div>
       </article>
       <section aria-labelledby="apply">
-        <h2 id="apply" className="text-2xl font-medium text-purple">
+        <h2 id="apply" className={s.applyTitle}>
           Apply for this role
         </h2>
-        <div className="mt-4">
+        <div className={s.mt4}>
           <ApplyForm slug={o.slug} email={site.email} />
         </div>
       </section>

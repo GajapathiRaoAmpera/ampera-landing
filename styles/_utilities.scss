@@ -1,0 +1,89 @@
+// Global helpers shared by many components. Everything else lives in *.module.scss next to its component.
+@use "tokens" as *;
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+// Skip link: hidden until focused
+.skip-link {
+  @extend .sr-only;
+
+  &:focus {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 50;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 0.5rem 1.25rem;
+    clip-path: none;
+    border-radius: $r-pill;
+    background: $purple;
+    color: $white;
+  }
+}
+
+// Whole card is one link: put on the <a>; the card needs `position: relative`.
+.stretched-link {
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+// Card hover lift (with a soft purple shadow). Cards that use it also get `position: relative`.
+.card-lift {
+  transition:
+    translate 0.3s,
+    box-shadow 0.3s;
+
+  &:hover {
+    box-shadow: 0 18px 40px -18px rgb(156 54 154 / 0.35);
+  }
+
+  @include motion-ok {
+    &:hover {
+      translate: 0 -4px;
+    }
+  }
+}
+
+// Below-the-fold sections: the browser skips their style, layout, paint and infinite
+// animations until they near the viewport. Content stays in the DOM and accessibility tree.
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
+// Decorative backdrops for dark sections
+.blueprint {
+  @include cover;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at 70% 40%, #000, transparent 70%);
+}
+
+.hero-glow {
+  @include cover;
+  pointer-events: none;
+  background:
+    radial-gradient(40rem 32rem at 80% 35%, rgb(156 54 154 / 0.35), transparent 70%),
+    radial-gradient(30rem 24rem at 10% 90%, rgb(0 15 92 / 0.5), transparent 70%);
+}

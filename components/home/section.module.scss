@@ -1,0 +1,61 @@
+// Shared shells and headings for homepage sections.
+@use "../../styles/tokens" as *;
+
+// Light section on the ivory page background
+.plain {
+  @include container;
+  padding-block: 5rem;
+}
+
+.plainTight {
+  @include container;
+  padding-bottom: 5rem;
+}
+
+// Full-width bands
+.white {
+  background: $white;
+  padding-block: 5rem;
+}
+
+.dark {
+  position: relative;
+  overflow: hidden;
+  background: $ink;
+  color: $white;
+  padding-block: 5rem;
+}
+
+.inner {
+  position: relative;
+  @include container;
+}
+
+.h2 {
+  margin-top: 1rem;
+  color: $purple;
+  @include text(4xl);
+  font-weight: 400;
+}
+
+.lead {
+  max-width: 48rem;
+  margin-top: 1rem;
+  @include text(lg);
+}
+
+.mt8 {
+  margin-top: 2rem;
+}
+
+.mt6 {
+  margin-top: 1.5rem;
+}
+
+.glow50 {
+  opacity: 0.5;
+}
+
+.glow60 {
+  opacity: 0.6;
+}

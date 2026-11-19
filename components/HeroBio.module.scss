@@ -1,0 +1,53 @@
+@use "../styles/tokens" as *;
+
+.stage {
+  position: absolute;
+  inset: 33.333% 0 4rem;
+  isolation: isolate;
+  pointer-events: none;
+}
+
+.callout {
+  position: absolute;
+  display: none;
+  align-items: center;
+  translate: -50% 0;
+
+  @include up(sm) {
+    display: flex;
+  }
+}
+
+.up {
+  flex-direction: column;
+  translate: -50% -100%;
+}
+
+.down {
+  flex-direction: column-reverse;
+}
+
+.label {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid rgba($fuchsia-300, 0.4);
+  border-radius: $r-pill;
+  background: rgba($ink, 0.8);
+  color: $white;
+  font-family: $font-mono;
+  @include text(sm);
+  white-space: nowrap;
+}
+
+.stem {
+  width: 1px;
+  height: 2rem;
+  background: linear-gradient(to bottom, rgba($fuchsia-300, 0.7), rgba($fuchsia-300, 0.1));
+}
+
+.point {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: $fuchsia-300;
+  box-shadow: 0 0 10px $fuchsia-300;
+}

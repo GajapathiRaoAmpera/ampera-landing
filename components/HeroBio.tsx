@@ -3,6 +3,8 @@ import dynamic from "next/dynamic";
 import { useInView, useReducedMotion } from "framer-motion";
 import { hasWebGL } from "@/lib/webgl";
 import { useEffect, useRef, useState } from "react";
+import { cx } from "@/lib/cx";
+import s from "./HeroBio.module.scss";
 
 // Three.js loads on demand, so it never blocks the HTML.
 const BioScene = dynamic(() => import("./BioScene"), { ssr: false });
@@ -18,7 +20,6 @@ const SERVICES = [
 ];
 // BioScene camera: z=8, fov 35 -> world height visible at z=0.
 const VIEW_H = 2 * 8 * Math.tan((17.5 * Math.PI) / 180);
-
 
 // Decoration only: hidden from assistive tech (the page has an sr-only list of the services).
 export function HeroBio() {
@@ -52,7 +53,7 @@ export function HeroBio() {
     <div
       ref={ref}
       aria-hidden
-      className="pointer-events-none absolute inset-x-0 top-1/3 bottom-16 isolate"
+      className={s.stage}
     >
       {gl && <BioScene animate={!reduce && inView} />}
       {gl &&
@@ -60,14 +61,12 @@ export function HeroBio() {
         SERVICES.map((c, i) => (
           <div
             key={c.text}
-            className={`rise absolute hidden -translate-x-1/2 sm:flex items-center ${c.up ? "-translate-y-full flex-col" : "flex-col-reverse"}`}
+            className={cx("rise", s.callout, c.up ? s.up : s.down)}
             style={{ ...project(c.x, c.y), "--i": i + 6 } as React.CSSProperties}
           >
-            <span className="rounded-pill border border-fuchsia-300/40 bg-ink/80 px-3 py-1 font-mono text-sm whitespace-nowrap text-white">
-              {c.text}
-            </span>
-            <span className="h-8 w-px bg-gradient-to-b from-fuchsia-300/70 to-fuchsia-300/10" />
-            <span className="size-2 rounded-full bg-fuchsia-300 shadow-[0_0_10px_#f0abfc]" />
+            <span className={s.label}>{c.text}</span>
+            <span className={s.stem} />
+            <span className={s.point} />
           </div>
         ))}
     </div>

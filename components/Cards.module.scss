@@ -1,0 +1,83 @@
+@use "../styles/tokens" as *;
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2rem;
+
+  @include up(md) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include up(lg) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.full {
+  height: 100%;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border-radius: $r-2xl;
+  background: $white;
+  box-shadow: ring(rgb(0 0 0 / 0.05)), $shadow-sm;
+
+  &:focus-within {
+    box-shadow: ring($navy, 2px), $shadow-sm;
+  }
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 1.5rem;
+}
+
+.title {
+  @include text(xl);
+  font-weight: 500;
+}
+
+.link {
+  .card:hover & {
+    color: $purple;
+  }
+}
+
+.summary {
+  display: -webkit-box;
+  margin-top: 0.5rem;
+  overflow: hidden;
+  color: $zinc-700;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+}
+
+.more {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  color: $purple;
+  @include text(sm);
+  font-weight: 500;
+}
+
+.arrow {
+  width: 1rem;
+  height: 1rem;
+  transition: translate 0.15s;
+
+  .card:hover & {
+    translate: 0.125rem -0.125rem;
+  }
+}

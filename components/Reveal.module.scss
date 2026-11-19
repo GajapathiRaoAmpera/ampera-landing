@@ -1,0 +1,19 @@
+@use "../styles/tokens" as *;
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    translate: 0 24px;
+  }
+}
+
+// `--delay` (0–0.4) shifts the start of the range, so siblings stagger as they scroll in.
+.reveal {
+  @supports (animation-timeline: view()) {
+    @include motion-ok {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry calc(var(--delay, 0) * 100%) entry calc(60% + var(--delay, 0) * 100%);
+    }
+  }
+}

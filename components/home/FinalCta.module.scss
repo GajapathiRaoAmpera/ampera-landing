@@ -1,0 +1,10 @@
+@use "../../styles/tokens" as *;
+
+.h2 {
+  @include text(4xl);
+  font-weight: 300;
+}
+
+.underline {
+  text-decoration: underline;
+}

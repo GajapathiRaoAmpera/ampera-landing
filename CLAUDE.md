@@ -1,7 +1,7 @@
 # Ampera Technologies — website rebuild (Framer → Next.js)
 
 Context file for this repo. Read this before starting any work.
-Last updated: 18 Nov 2026 (added Campus Hire integration + chatbot, sections 12–13).
+Last updated: 19 Nov 2026 (Tailwind replaced by SCSS modules; homepage split into `components/home/*`).
 
 ## 1. What we are doing
 
@@ -92,7 +92,7 @@ Titles and bios: pull them from the current `/about/leadership-team/*` pages.
 ## 6. Tech stack
 
 - Next.js (App Router) + TypeScript
-- Tailwind CSS with the brand tokens above in the theme
+- SCSS (Sass) with CSS Modules: brand tokens and mixins in `styles/_tokens.scss`, one `*.module.scss` per component, shared base/utilities/keyframes in `styles/` (loaded by `app/globals.scss`). No Tailwind.
 - `next/font/local` for Switzer; `next/font/google` for the mono font
 - React Three Fiber + drei for the 3D hero only
 - Framer Motion (the animation library) for scroll and UI animation

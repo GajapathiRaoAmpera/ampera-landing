@@ -21,6 +21,8 @@ import {
   LuUmbrella,
   LuUsers,
 } from "react-icons/lu";
+import { cx } from "@/lib/cx";
+import s from "./CardArt.module.scss";
 
 // Keyed by the last URL segment of accelerator / case-study pages.
 const ICONS: Record<string, IconType> = {
@@ -66,15 +68,8 @@ export function CardArt({ path, size = "md" }: { path: string; size?: "md" | "lg
   const nodes = Array.from({ length: 12 }, () => [20 + r() * 360, 14 + r() * 132] as const);
   const id = `ca-${slug}`;
   return (
-    <div
-      aria-hidden
-      className={`relative overflow-hidden bg-ink ${size === "lg" ? "min-h-56 flex-1" : "h-36"}`}
-    >
-      <svg
-        viewBox="0 0 400 160"
-        preserveAspectRatio="xMidYMid slice"
-        className="absolute inset-0 size-full"
-      >
+    <div aria-hidden className={cx(s.art, s[size])}>
+      <svg viewBox="0 0 400 160" preserveAspectRatio="xMidYMid slice" className={s.svg}>
         <defs>
           <radialGradient id={id} cx={0.3 + r() * 0.4} cy="0.5" r="0.8">
             <stop offset="0" stopColor="#9c369a" stopOpacity="0.55" />
@@ -92,7 +87,9 @@ export function CardArt({ path, size = "md" }: { path: string; size?: "md" | "lg
               x2={x2}
               y2={y2}
               strokeWidth={1}
-              className={i % 3 ? "stroke-white/15" : "flow stroke-[#e9b3e7]/50"}
+              {...(i % 3
+                ? { stroke: "#fff", strokeOpacity: 0.15 }
+                : { className: "flow", stroke: "#e9b3e7", strokeOpacity: 0.5 })}
             />
           );
         })}
@@ -102,13 +99,15 @@ export function CardArt({ path, size = "md" }: { path: string; size?: "md" | "lg
             cx={x}
             cy={y}
             r={i % 4 ? 2 : 3.5}
-            className={i % 4 ? "fill-white/40" : "node-pulse fill-[#e9b3e7]"}
+            {...(i % 4
+              ? { fill: "#fff", fillOpacity: 0.4 }
+              : { className: "node-pulse", fill: "#e9b3e7" })}
             style={{ animationDelay: `${i * 0.35}s` }}
           />
         ))}
       </svg>
-      <span className="card-art-icon absolute top-1/2 left-1/2 grid size-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-2xl border border-white/20 bg-white/10 text-white backdrop-blur-sm transition-transform duration-500">
-        <Icon className="size-7" />
+      <span className={s.icon}>
+        <Icon />
       </span>
     </div>
   );

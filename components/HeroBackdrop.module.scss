@@ -1,0 +1,24 @@
+@use "../styles/tokens" as *;
+
+.backdrop {
+  position: absolute;
+  top: 5rem;
+  right: -4rem;
+  display: none;
+  width: 26rem;
+  height: 26rem;
+  opacity: 0.8;
+  pointer-events: none;
+
+  @include up(lg) {
+    display: block;
+  }
+}
+
+.pyramid {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: screen;
+  mask-image: radial-gradient(closest-side, #000 55%, transparent);
+}

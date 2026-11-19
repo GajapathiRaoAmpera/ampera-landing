@@ -3,10 +3,10 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import { hasWebGL } from "@/lib/webgl";
 import { useEffect, useState } from "react";
+import s from "./HeroBackdrop.module.scss";
 
 // Three.js only loads on demand, so it never blocks the HTML/text.
 const PyramidScene = dynamic(() => import("./PyramidScene"), { ssr: false });
-
 
 // Static pyramid: server-rendered default and the reduced-motion / no-WebGL fallback.
 function StaticPyramid() {
@@ -17,7 +17,7 @@ function StaticPyramid() {
       width={836}
       height={470}
       priority
-      className="h-full w-full object-contain mix-blend-screen [mask-image:radial-gradient(closest-side,#000_55%,transparent)]"
+      className={s.pyramid}
     />
   );
 }
@@ -35,10 +35,7 @@ export function HeroBackdrop() {
 
   // Decoration only: hidden from assistive tech, no pointer events, headline stays real HTML.
   return (
-    <div
-      aria-hidden
-      className="pointer-events-none absolute -right-16 top-20 hidden size-[26rem] opacity-80 lg:block"
-    >
+    <div aria-hidden className={s.backdrop}>
       {animated ? <PyramidScene /> : <StaticPyramid />}
     </div>
   );

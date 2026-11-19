@@ -1,9 +1,10 @@
+import { cx } from "@/lib/cx";
+import s from "./Eyebrow.module.scss";
+
 export function Eyebrow({ children, dark }: { children: React.ReactNode; dark?: boolean }) {
   return (
-    <p
-      className={`flex items-center gap-2 text-sm font-medium uppercase tracking-[0.3em] ${dark ? "text-white" : "text-navy"}`}
-    >
-      <span aria-hidden className="size-2 rounded-full bg-purple" />
+    <p className={cx(s.eyebrow, dark && s.dark)}>
+      <span aria-hidden className={s.dot} />
       {children}
     </p>
   );

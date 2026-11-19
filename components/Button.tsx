@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { LuArrowUpRight } from "react-icons/lu";
+import { cx } from "@/lib/cx";
+import s from "./Button.module.scss";
 
 type Props = {
   href: string;
@@ -9,23 +11,12 @@ type Props = {
 };
 
 export function Button({ href, children, variant = "primary", dark }: Props) {
-  const base =
-    "inline-flex min-h-11 items-center gap-3 rounded-pill px-6 py-2 text-base font-medium transition-colors";
-  const style =
-    variant === "primary"
-      ? "bg-purple text-white hover:bg-[#832a81]"
-      : dark
-        ? "border border-white text-white hover:bg-white/10"
-        : "border border-purple text-purple hover:bg-purple/5";
   return (
-    <Link href={href} className={`${base} ${style}`}>
+    <Link href={href} className={cx(s.button, s[variant], dark && s.dark)}>
       {children}
       {variant === "primary" && (
-        <span
-          aria-hidden
-          className="grid size-7 place-items-center rounded-full bg-white text-purple"
-        >
-          <LuArrowUpRight className="size-4" />
+        <span aria-hidden className={s.arrow}>
+          <LuArrowUpRight />
         </span>
       )}
     </Link>

@@ -1,3 +1,5 @@
+import s from "./ServiceVisual.module.scss";
+
 // Decorative-but-readable diagrams: real text in the SVG (crawlable), a data packet moving through, no stats.
 const FLOWS: Record<string, string[]> = {
   "/services/genai-llms": ["Documents", "Vector search", "LLM", "Answer"],
@@ -7,10 +9,13 @@ const FLOWS: Record<string, string[]> = {
 };
 const HUB = ["Tools", "Workflow", "Human review", "Governance"];
 
-const box = "fill-white stroke-purple";
+const PURPLE = "#9c369a";
+const NAVY = "#000f5c";
+const box = { fill: "#fff", stroke: PURPLE, className: "node-glow" } as const;
 const label = {
   textAnchor: "middle",
-  className: "fill-ink text-[13px]",
+  fill: "#050505",
+  fontSize: 13,
   dominantBaseline: "middle",
 } as const;
 
@@ -24,14 +29,15 @@ export function ServiceVisual({ href }: { href: string }) {
         viewBox="-3 0 486 100"
         role="img"
         aria-label={`Diagram: ${flow.join(" to ")}`}
-        className="h-auto w-full max-w-xl"
+        className={s.svg}
       >
         {/* drawn first: node boxes cover it as it passes through */}
         <circle
           cx={45}
           cy={50}
           r={5}
-          className="packet fill-purple"
+          className="packet"
+          fill={PURPLE}
           style={{ "--dx": "390px", "--dy": "0px" } as React.CSSProperties}
         />
         {flow.map((t, i) => (
@@ -43,7 +49,7 @@ export function ServiceVisual({ href }: { href: string }) {
               height={40}
               rx={20}
               strokeWidth={1.5}
-              className={`${box} node-glow`}
+              {...box}
               style={{ animationDelay: `${(i * 3.2) / 3}s` }}
             />
             <text x={i * 130 + 45} y={50} {...label}>
@@ -57,11 +63,12 @@ export function ServiceVisual({ href }: { href: string }) {
                   x2={i * 130 + 122}
                   y2={50}
                   strokeWidth={2}
-                  className="flow stroke-navy"
+                  className="flow"
+                  stroke={NAVY}
                 />
                 <polygon
                   points={`${i * 130 + 130},50 ${i * 130 + 122},45 ${i * 130 + 122},55`}
-                  className="fill-navy"
+                  fill={NAVY}
                 />
               </>
             )}
@@ -81,7 +88,7 @@ export function ServiceVisual({ href }: { href: string }) {
       viewBox="0 0 480 160"
       role="img"
       aria-label={`Diagram: an agent connected to ${HUB.join(", ")}`}
-      className="h-auto w-full max-w-xl"
+      className={s.svg}
     >
       {nodes.map(([x, y], i) => (
         <line
@@ -91,7 +98,8 @@ export function ServiceVisual({ href }: { href: string }) {
           x2={x + 55}
           y2={y + 18}
           strokeWidth={2}
-          className="flow stroke-navy"
+          className="flow"
+          stroke={NAVY}
         />
       ))}
       {nodes.map(([x, y], i) => (
@@ -100,7 +108,8 @@ export function ServiceVisual({ href }: { href: string }) {
           cx={240}
           cy={80}
           r={4.5}
-          className="packet fill-purple"
+          className="packet"
+          fill={PURPLE}
           style={
             {
               "--dx": `${x + 55 - 240}px`,
@@ -110,13 +119,15 @@ export function ServiceVisual({ href }: { href: string }) {
           }
         />
       ))}
-      <rect x={190} y={58} width={100} height={44} rx={22} className="fill-purple" />
+      <rect x={190} y={58} width={100} height={44} rx={22} fill={PURPLE} />
       <text
         x={240}
         y={80}
         textAnchor="middle"
         dominantBaseline="middle"
-        className="fill-white text-[14px] font-medium"
+        fill="#fff"
+        fontSize={14}
+        fontWeight={500}
       >
         Agent
       </text>
@@ -129,7 +140,7 @@ export function ServiceVisual({ href }: { href: string }) {
             height={36}
             rx={18}
             strokeWidth={1.5}
-            className={`${box} node-glow`}
+            {...box}
             style={{ animationDelay: `${i * 0.8 + 3.1}s` }}
           />
           <text x={x + 55} y={y + 18} {...label}>

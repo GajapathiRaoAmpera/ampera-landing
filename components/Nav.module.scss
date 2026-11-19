@@ -1,0 +1,114 @@
+@use "../styles/tokens" as *;
+
+.header {
+  position: sticky;
+  top: 0.75rem;
+  z-index: 40;
+  height: 0;
+  padding-inline: 0.75rem;
+  color: $white;
+}
+
+// Glass: light sheen over 60% ink; white text stays above 4.5:1 on ivory and dark sections
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding: 0.5rem 1.25rem;
+  border: 1px solid rgb(255 255 255 / 0.3);
+  border-radius: $r-3xl;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.22), rgb(255 255 255 / 0.06)),
+    rgb(5 5 5 / 0.6);
+  backdrop-filter: blur(20px) saturate(1.5);
+  box-shadow:
+    0 8px 32px rgb(0 0 0 / 0.25),
+    inset 0 1px 0 rgb(255 255 255 / 0.35);
+
+  @include up(lg) {
+    border-radius: $r-pill;
+  }
+}
+
+.home {
+  flex-shrink: 0;
+}
+
+.logo {
+  width: auto;
+  height: 2.25rem;
+}
+
+// Menu toggle: below 1024px only, 44px target
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding-inline: 1rem;
+  border: 1px solid rgb(255 255 255 / 0.4);
+  border-radius: $r-pill;
+  @include text(base);
+
+  svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  @include up(lg) {
+    display: none;
+  }
+}
+
+// Below 1024px: a full-width panel under the bar, hidden until opened.
+// Desktop: `display: contents` lets the nav and CTA sit in the bar's own flex row.
+.menu {
+  display: none;
+  flex-basis: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  padding-block: 0.5rem 1rem;
+
+  &.open {
+    display: flex;
+  }
+
+  @include up(lg) {
+    display: contents;
+  }
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  @include text(lg);
+
+  @include up(lg) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 1.5rem;
+    @include text(base);
+  }
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  @include up(lg) {
+    display: inline;
+    min-height: 0;
+    padding-block: 0.5rem;
+  }
+}

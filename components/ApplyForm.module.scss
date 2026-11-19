@@ -1,0 +1,89 @@
+@use "../styles/tokens" as *;
+
+.form > * + * {
+  margin-top: 1.25rem;
+}
+
+.label {
+  font-weight: 500;
+}
+
+.hint {
+  @include text(sm);
+}
+
+.input {
+  display: block;
+  width: 100%;
+  min-height: 2.75rem;
+  margin-top: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid rgb(0 0 0 / 0.4);
+  border-radius: $r-lg;
+  background: $white;
+}
+
+.error {
+  margin-top: 0.25rem;
+  color: $red-700;
+}
+
+.summary {
+  padding: 1rem;
+  border: 2px solid $red-700;
+  border-radius: $r-lg;
+  background: $white;
+}
+
+.summaryTitle {
+  color: $red-700;
+  font-weight: 500;
+}
+
+.summaryList {
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.checkbox {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: 0.25rem;
+}
+
+.link {
+  color: $purple;
+  text-decoration: underline;
+}
+
+.submit:disabled {
+  opacity: 0.7;
+}
+
+.success {
+  padding: 1.5rem;
+  border-radius: $r-2xl;
+  background: $white;
+  box-shadow: ring(rgb(0 0 0 / 0.05));
+}
+
+.successTitle {
+  color: $purple;
+  @include text(2xl);
+  font-weight: 500;
+}
+
+.successBody {
+  margin-top: 0.5rem;
+}

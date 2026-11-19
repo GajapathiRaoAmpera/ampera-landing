@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import s from "@/styles/page.module.scss";
 import { notFound } from "next/navigation";
 import { ServiceVisual } from "@/components/ServiceVisual";
 import { Prose } from "@/components/Prose";
@@ -73,7 +74,7 @@ export default async function ContentPage({ params }: Props) {
   const page = getPage(toPath((await params).slug));
   if (!page) notFound();
   return (
-    <article className="mx-auto max-w-6xl px-4 pb-16 pt-28">
+    <article className={s.page}>
       {page.path.startsWith("/services/") ? (
         <>
           <Prose>{page.body.split("\n\n").slice(0, 2).join("\n\n")}</Prose>
@@ -84,10 +85,10 @@ export default async function ContentPage({ params }: Props) {
               height={675}
               sizes="(min-width: 1152px) 1088px, 100vw"
               alt=""
-              className="mt-8 aspect-video max-h-96 w-full rounded-2xl object-cover"
+              className={s.cover}
             />
           )}
-          <div className="mt-8">
+          <div className={s.visual}>
             <ServiceVisual href={page.path} />
           </div>
           <Prose>{page.body.split("\n\n").slice(2).join("\n\n")}</Prose>
@@ -108,7 +109,7 @@ export default async function ContentPage({ params }: Props) {
               width={900}
               height={600}
               alt=""
-              className="mt-8 max-h-96 w-auto rounded-2xl object-cover"
+              className={s.inlineImage}
             />
           )
         );

@@ -1,0 +1,69 @@
+@use "../../styles/tokens" as *;
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  scroll-margin-top: 5rem;
+  background: $ink;
+  color: $white;
+}
+
+.grid {
+  position: relative;
+  display: grid;
+  align-items: center;
+  gap: 3rem;
+  @include container;
+  padding-block: 6rem;
+
+  @include up(lg) {
+    grid-template-columns: 0.9fr 1.1fr;
+  }
+}
+
+.h1 {
+  max-width: 48rem;
+  margin-top: 1.5rem;
+  font-size: 2.25rem;
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+
+  @include up(sm) {
+    font-size: 3rem;
+  }
+}
+
+.accent {
+  color: $purple-light;
+}
+
+.lead {
+  max-width: 36rem;
+  margin-top: 1.5rem;
+  color: $zinc-200;
+  font-size: 1.125rem;
+  line-height: 1.625;
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2.5rem;
+  @include text(sm);
+
+  li {
+    padding: 0.25rem 0.75rem;
+    border: 1px solid rgb(255 255 255 / 0.4);
+    border-radius: $r-pill;
+  }
+}

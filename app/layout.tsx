@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { JetBrains_Mono } from "next/font/google";
-import "./globals.css";
+import "./globals.scss";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { site } from "@/lib/site";
@@ -11,7 +11,7 @@ const switzer = localFont({
   variable: "--font-switzer",
   weight: "100 900",
 });
-const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
+const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -36,10 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${switzer.variable} ${mono.variable}`}>
       <body>
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-pill focus:bg-purple focus:px-5 focus:py-2 focus:text-white"
-        >
+        <a href="#main" className="skip-link">
           Skip to content
         </a>
         <Nav />

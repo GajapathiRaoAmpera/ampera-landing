@@ -1,0 +1,83 @@
+@use "../../styles/tokens" as *;
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+
+  @include up(md) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.wideItem {
+  @include up(md) {
+    grid-column: span 2;
+  }
+}
+
+.full {
+  height: 100%;
+}
+
+.card {
+  position: relative;
+  height: 100%;
+  padding: 1.5rem;
+  border-radius: $r-3xl;
+  background: $white;
+  box-shadow: ring(rgb(0 0 0 / 0.05)), $shadow-sm;
+
+  &:focus-within {
+    box-shadow: ring($navy, 2px), $shadow-sm;
+  }
+}
+
+.wide {
+  background: linear-gradient(120deg, #fff, #f8ecf8);
+  box-shadow: ring(rgba($purple, 0.25)), $shadow-sm;
+
+  @include up(md) {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    align-items: center;
+    gap: 2.5rem;
+    padding: 2rem;
+
+    .text {
+      margin-top: 0;
+    }
+  }
+}
+
+.visual {
+  padding: 1rem;
+  border-radius: $r-2xl;
+  background: $ivory;
+  box-shadow: ring(rgb(0 0 0 / 0.05));
+}
+
+.text {
+  margin-top: 1.25rem;
+}
+
+.across {
+  margin-bottom: 0.5rem;
+  color: $purple;
+  @include mono-label;
+}
+
+.title {
+  @include text(xl);
+  font-weight: 500;
+}
+
+.link {
+  .card:hover & {
+    color: $purple;
+  }
+}
+
+.tags {
+  margin-top: 1rem;
+}

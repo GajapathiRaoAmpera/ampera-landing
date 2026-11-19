@@ -1,0 +1,164 @@
+@use "../styles/tokens" as *;
+
+.layout {
+  display: grid;
+  align-items: center;
+  gap: 3rem;
+  margin-top: 2.5rem;
+
+  @include up(lg) {
+    grid-template-columns: 1.15fr 1fr;
+  }
+}
+
+.frame {
+  position: relative;
+  padding: 2.25rem 0.75rem 0.75rem;
+  border: 1px dashed rgba($purple-light, 0.35);
+  border-radius: $r-3xl;
+  transition: border-color 0.3s;
+}
+
+.frameAll {
+  border-color: $purple-light;
+}
+
+.across {
+  position: absolute;
+  top: -1rem;
+  left: 1.5rem;
+  padding: 0.375rem 1rem;
+  border-radius: $r-pill;
+  background: $purple;
+  color: $white;
+  @include text(sm);
+  font-weight: 500;
+  box-shadow:
+    0 10px 15px -3px rgba($purple, 0.3),
+    0 4px 6px -4px rgba($purple, 0.3);
+}
+
+.rail {
+  position: absolute;
+  top: 3.5rem;
+  bottom: 2.5rem;
+  left: 2.15rem;
+  width: 1px;
+  background: rgb(255 255 255 / 0.15);
+}
+
+.packet {
+  position: absolute;
+  left: -3px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: $purple-light;
+  box-shadow: 0 0 10px $purple-light;
+}
+
+.rows {
+  position: relative;
+
+  > li + li {
+    margin-top: 0.5rem;
+  }
+}
+
+.row {
+  position: relative;
+  padding: 1rem 1.25rem 1rem 4rem;
+  border-radius: $r-2xl;
+}
+
+.highlight {
+  @include cover;
+  border-radius: $r-2xl;
+  background: rgb(255 255 255 / 0.06);
+  box-shadow: ring(rgba($purple-light, 0.5));
+}
+
+.level {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid rgb(255 255 255 / 0.25);
+  border-radius: 50%;
+  background: $ink;
+  color: $zinc-300;
+  font-family: $font-mono;
+  @include text(xs);
+  transition:
+    background-color 0.3s,
+    border-color 0.3s,
+    color 0.3s;
+
+  &.on {
+    border-color: $purple;
+    background: $purple;
+    color: $white;
+    box-shadow: 0 0 18px rgba($purple, 0.7);
+  }
+}
+
+.name {
+  position: relative;
+  color: $white;
+  @include text(xl);
+  font-weight: 500;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline-color: $purple-light;
+  }
+}
+
+.chips {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.chip {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid rgb(255 255 255 / 0.15);
+  border-radius: $r-pill;
+  color: $zinc-300;
+  font-family: $font-mono;
+  @include text(xs);
+  transition:
+    border-color 0.3s,
+    color 0.3s;
+
+  &.on {
+    border-color: rgba($purple-light, 0.6);
+    color: $white;
+  }
+}
+
+.scene {
+  position: relative;
+  display: none;
+  height: 32rem;
+
+  @include up(lg) {
+    display: block;
+  }
+}
+
+.sceneGlow {
+  position: absolute;
+  inset: 2.5rem;
+  border-radius: 50%;
+  background: rgba($purple, 0.25);
+  filter: blur(64px);
+}

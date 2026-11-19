@@ -1,0 +1,62 @@
+@use "../styles/tokens" as *;
+
+.prose {
+  h1 {
+    color: $purple;
+    @include text(4xl);
+    font-weight: 300;
+
+    @include up(sm) {
+      @include text(5xl);
+    }
+  }
+
+  h2 {
+    margin-top: 3rem;
+    color: $purple;
+    @include text(3xl);
+    font-weight: 400;
+  }
+
+  h3 {
+    margin-top: 2rem;
+    @include text(2xl);
+    font-weight: 500;
+  }
+
+  h4 {
+    margin-top: 1.5rem;
+    color: $navy;
+    @include text(lg);
+    font-weight: 500;
+  }
+
+  h5 {
+    margin-top: 1rem;
+    font-weight: 500;
+  }
+
+  p {
+    max-width: 48rem;
+    margin-top: 1rem;
+    font-size: 1.125rem;
+    line-height: 1.625;
+  }
+
+  ul {
+    max-width: 48rem;
+    margin-top: 1rem;
+    padding-left: 1.5rem;
+    list-style: disc;
+    @include text(lg);
+
+    > li + li {
+      margin-top: 0.5rem;
+    }
+  }
+
+  a {
+    color: $purple;
+    text-decoration: underline;
+  }
+}

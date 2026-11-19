@@ -1,7 +1,8 @@
-"use client";
-import { motion, useReducedMotion } from "framer-motion";
+import { cx } from "@/lib/cx";
+import s from "./Reveal.module.scss";
 
-// Fade-up on scroll. Text is already in the server HTML; this only animates it in.
+// Fade-up on scroll, pure CSS (scroll-driven animation): no JavaScript, so nothing to hydrate.
+// Browsers without `animation-timeline` and reduced-motion users just see the content.
 export function Reveal({
   children,
   delay = 0,
@@ -11,16 +12,9 @@ export function Reveal({
   delay?: number;
   className?: string;
 }) {
-  const reduce = useReducedMotion();
   return (
-    <motion.div
-      className={className}
-      initial={reduce ? false : { opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
-    >
+    <div className={cx(s.reveal, className)} style={{ "--delay": delay } as React.CSSProperties}>
       {children}
-    </motion.div>
+    </div>
   );
 }

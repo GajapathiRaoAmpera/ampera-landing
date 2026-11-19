@@ -10,6 +10,8 @@ import {
   LuRotateCcw,
   LuUser,
 } from "react-icons/lu";
+import { cx } from "@/lib/cx";
+import s from "./AgentConsole.module.scss";
 
 const LABEL: Record<Status, string> = {
   done: "Done",
@@ -18,10 +20,10 @@ const LABEL: Record<Status, string> = {
   approval: "Needs approval",
 };
 const COLOR: Record<Status, string> = {
-  done: "text-emerald-300",
-  running: "text-fuchsia-300",
-  queued: "text-zinc-300",
-  approval: "text-amber-300",
+  done: s.done,
+  running: s.running,
+  queued: s.queued,
+  approval: s.approval,
 };
 const TYPE_MS = 30; // per typed character
 const STEP_MS = 1100; // a step "runs"
@@ -136,19 +138,15 @@ export function AgentConsole() {
     <section
       ref={root}
       aria-label="Agent console example"
-      className="rounded-2xl border border-white/15 bg-gradient-to-b from-white/[0.09] to-white/[0.02] text-white shadow-[0_0_90px_-20px_rgba(156,54,154,0.7)] backdrop-blur"
+      className={s.console}
     >
-      <div className="flex flex-wrap items-center gap-x-3 gap-y-0 border-b border-white/10 px-5 pt-3">
-        <span aria-hidden className="flex gap-1.5">
-          <i className="size-3 rounded-full bg-red-400/80" />
-          <i className="size-3 rounded-full bg-amber-300/80" />
-          <i className="size-3 rounded-full bg-emerald-400/80" />
+      <div className={s.bar}>
+        <span aria-hidden className={s.lights}>
+          <i />
+          <i />
+          <i />
         </span>
-        <div
-          role="tablist"
-          aria-label="Example agents"
-          className="order-last flex w-full flex-wrap gap-x-2"
-        >
+        <div role="tablist" aria-label="Example agents" className={s.tabs}>
           {agents.map((a, i) => (
             <button
               key={a.id}
@@ -162,7 +160,7 @@ export function AgentConsole() {
               tabIndex={active === i ? 0 : -1}
               onClick={() => select(i)}
               onKeyDown={(e) => onKey(e, i)}
-              className={`min-h-11 border-b-2 px-2 text-sm transition-colors ${active === i ? "border-fuchsia-300 text-white" : "border-transparent text-zinc-300 hover:text-white"}`}
+              className={cx(s.tab, active === i && s.tabActive)}
             >
               {a.tab}
             </button>
@@ -181,15 +179,9 @@ export function AgentConsole() {
               finished ? "Replay example" : playing ? "Pause animation" : "Play animation"
             }
             title={finished ? "Replay example" : playing ? "Pause animation" : "Play animation"}
-            className="ml-auto grid size-11 place-items-center rounded-full text-zinc-300 hover:bg-white/10 hover:text-white"
+            className={s.play}
           >
-            {finished ? (
-              <LuRotateCcw className="size-4" />
-            ) : playing ? (
-              <LuPause className="size-4" />
-            ) : (
-              <LuPlay className="size-4" />
-            )}
+            {finished ? <LuRotateCcw /> : playing ? <LuPause /> : <LuPlay />}
           </button>
         )}
       </div>
@@ -207,20 +199,20 @@ export function AgentConsole() {
             id={`panel-${a.id}`}
             aria-labelledby={`tab-${a.id}`}
             hidden={!isActive}
-            className="min-h-[19rem] px-5 py-5 font-mono"
+            className={s.panel}
           >
-            <p className="text-base leading-relaxed">
-              <span aria-hidden className="text-fuchsia-300">
+            <p className={s.prompt}>
+              <span aria-hidden className={s.running}>
                 ${" "}
               </span>
               <span className="sr-only">Prompt: </span>“{prompt}
               {typing && <span aria-hidden className="caret" />}
               {!typing && "”"}
             </p>
-            <ol className="mt-5 space-y-3 text-sm">
-              {a.steps.map((s, j) => {
-                const st = isActive ? statusOf(j) : s.status;
-                const person = s.status === "approval";
+            <ol className={s.steps}>
+              {a.steps.map((step, j) => {
+                const st = isActive ? statusOf(j) : step.status;
+                const person = step.status === "approval";
                 const label =
                   person && st === "done" && cursor !== null
                     ? "Approved by a person"
@@ -229,33 +221,33 @@ export function AgentConsole() {
                       : LABEL[st];
                 return (
                   <li
-                    key={s.label}
-                    className={`flex items-center gap-3 transition-opacity duration-500 ${st === "queued" ? "opacity-60" : "line-in"}`}
+                    key={step.label}
+                    className={cx(s.step, st === "queued" ? s.waiting : "line-in")}
                   >
-                    <span aria-hidden className="grid size-5 shrink-0 place-items-center">
+                    <span aria-hidden className={s.status}>
                       {st === "running" ? (
                         <span className="spinner" />
                       ) : (
-                        <span key={st} className={`pop ${COLOR[st]}`}>
+                        <span key={st} className={cx("pop", COLOR[st])}>
                           {st === "done" ? (
-                            <LuCheck className="size-4" />
+                            <LuCheck />
                           ) : st === "approval" ? (
-                            <LuUser className="size-4" />
+                            <LuUser />
                           ) : (
-                            <LuCircle className="size-3" />
+                            <LuCircle className={s.small} />
                           )}
                         </span>
                       )}
                     </span>
-                    <span className={st === "queued" ? "" : "text-white"}>{s.label}</span>
-                    <span className={`ml-auto text-right ${COLOR[st]}`}>{label}</span>
+                    <span className={st === "queued" ? undefined : s.live}>{step.label}</span>
+                    <span className={cx(s.label, COLOR[st])}>{label}</span>
                   </li>
                 );
               })}
             </ol>
             {isActive && finished && (
-              <p className="line-in mt-5 rounded-lg border border-emerald-300/40 bg-emerald-300/10 px-3 py-2 text-sm text-emerald-200">
-                <LuCircleCheck aria-hidden className="mr-2 inline size-4 align-[-3px]" />
+              <p className={cx("line-in", s.finished)}>
+                <LuCircleCheck aria-hidden className={s.finishedIcon} />
                 Finished, with a person approving the key step.
               </p>
             )}
@@ -265,7 +257,7 @@ export function AgentConsole() {
       <p role="status" className="sr-only">
         {announce}
       </p>
-      <p className="border-t border-white/10 px-5 py-3 text-sm text-zinc-300">
+      <p className={s.note}>
         Illustrative example of an agent our team builds for clients, with a person approving key
         steps. Not live data.
       </p>

@@ -1,0 +1,113 @@
+@use "../../styles/tokens" as *;
+
+.grid {
+  display: grid;
+  grid-auto-rows: 1fr;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+
+  @include up(sm) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include up(lg) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.full {
+  height: 100%;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border-radius: $r-3xl;
+  background: $white;
+  box-shadow: ring(rgb(0 0 0 / 0.05)), $shadow-sm;
+
+  &:focus-within {
+    box-shadow: ring($navy, 2px), $shadow-sm;
+  }
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 1.5rem;
+}
+
+.chip {
+  color: $purple;
+  @include mono-label;
+}
+
+.title {
+  margin-top: 0.5rem;
+  @include text(xl);
+  font-weight: 500;
+}
+
+.link {
+  .card:not(.suite):hover & {
+    color: $purple;
+  }
+}
+
+.summary {
+  display: -webkit-box;
+  margin-top: 0.5rem;
+  overflow: hidden;
+  color: $zinc-700;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+}
+
+.more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: auto;
+  padding-top: 1.25rem;
+  color: $purple;
+  @include text(sm);
+  font-weight: 500;
+}
+
+.arrow {
+  width: 1rem;
+  height: 1rem;
+  transition: translate 0.15s;
+
+  .card:hover & {
+    translate: 0.125rem -0.125rem;
+  }
+}
+
+// Suite cards are dark
+.suite {
+  background: $ink;
+  color: $white;
+  box-shadow: ring(rgb(255 255 255 / 0.1));
+
+  &:focus-within {
+    box-shadow: ring($purple-light, 2px);
+  }
+
+  .chip {
+    color: $purple-light;
+  }
+
+  .summary {
+    color: $zinc-300;
+  }
+
+  .more {
+    color: inherit;
+  }
+}

@@ -1,38 +1,6 @@
-@import "tailwindcss";
-
-@theme {
-  --color-purple: #9c369a;
-  --color-navy: #000f5c;
-  --color-ivory: #fffefa;
-  --color-ink: #050505;
-  --color-grey: #969696; /* muted decoration only: fails 4.5:1 on ivory */
-  --font-sans: var(--font-switzer), system-ui, sans-serif;
-  --font-mono: var(--font-mono), ui-monospace, monospace;
-  --radius-pill: 60px;
-}
-
-body {
-  background: var(--color-ivory);
-  color: var(--color-ink);
-  font-family: var(--font-sans);
-  font-weight: 400;
-}
-
-:focus-visible {
-  outline: 3px solid var(--color-navy);
-  outline-offset: 3px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    animation-delay: 0s !important;
-    transition-duration: 0.01ms !important;
-  }
-}
+// Shared keyframes + animation classes (global: used inside SVGs across components).
+// The reduced-motion rule in _base.scss collapses all of them to their end state.
+@use "tokens" as *;
 
 @keyframes flow {
   to {
@@ -44,10 +12,7 @@ body {
   animation: flow 1s linear infinite;
 }
 
-/* Trust band (components/TrustStrip.tsx): soft glow + a light sweep across the ISO mark */
-.trust-glow {
-  background: radial-gradient(60% 80% at 85% 0%, rgb(156 54 154 / 0.07), transparent 70%);
-}
+/* Trust band (components/TrustStrip.tsx): a light sweep across the ISO mark */
 @keyframes sheen {
   0%,
   65% {
@@ -96,7 +61,7 @@ body {
   animation: node-glow 3.2s ease-out infinite;
 }
 
-/* Card art (components/CardArt.tsx) + card hover */
+/* Card art (components/CardArt.tsx) */
 @keyframes node-pulse {
   50% {
     transform: scale(1.8);
@@ -108,29 +73,7 @@ body {
   transform-origin: center;
   animation: node-pulse 2.4s ease-in-out infinite;
 }
-.card-lift {
-  transition:
-    translate 0.3s,
-    box-shadow 0.3s;
-}
-.card-lift:hover {
-  box-shadow: 0 18px 40px -18px rgb(156 54 154 / 0.35);
-}
-.group:hover .card-art-icon {
-  scale: 1.08;
-}
-@media (prefers-reduced-motion: no-preference) {
-  .card-lift:hover {
-    translate: 0 -4px;
-  }
-}
 
-/* Below-the-fold sections (app/page.tsx): the browser skips their style, layout, paint and infinite
-   animations until they near the viewport. Content stays in the DOM and accessibility tree. */
-.cv-auto {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 900px;
-}
 
 /* Stack layers rail (components/StackLayers.tsx): data dots climb L1 -> L4; hidden when motion is reduced */
 @keyframes rail-flow {
@@ -282,23 +225,9 @@ body {
   animation: fix-b 6s infinite;
 }
 
-/* Blueprint grid behind the dark hero (static: motion is reserved for the content) */
-.blueprint {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse at 70% 40%, #000, transparent 70%);
-}
 
-/* Purple brand glow behind the console */
-.hero-glow {
-  background:
-    radial-gradient(40rem 32rem at 80% 35%, rgba(156, 54, 154, 0.35), transparent 70%),
-    radial-gradient(30rem 24rem at 10% 90%, rgba(0, 15, 92, 0.5), transparent 70%);
-}
 
-/* Staggered entrance; reduced-motion rule above collapses it to instant */
+/* Staggered entrance; the reduced-motion rule collapses it to instant */
 @keyframes rise {
   from {
     opacity: 0;
@@ -310,14 +239,6 @@ body {
   animation-delay: calc(var(--i, 0) * 110ms);
 }
 
-/* Glass nav: light sheen over 60% ink; white text stays above 4.5:1 on ivory and dark sections */
-.glass {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.06)),
-    rgba(5, 5, 5, 0.6);
-  backdrop-filter: blur(20px) saturate(1.5);
-  -webkit-backdrop-filter: blur(20px) saturate(1.5);
-}
 
 /* Agent console story (components/AgentConsole.tsx) */
 @keyframes pop {
@@ -342,7 +263,7 @@ body {
   height: 1.1em;
   margin-left: 2px;
   vertical-align: text-bottom;
-  background: #f0abfc;
+  background: $fuchsia-300;
   animation: blink 1s steps(1) infinite;
 }
 @keyframes spin {
@@ -353,8 +274,8 @@ body {
 .spinner {
   width: 14px;
   height: 14px;
-  border: 2px solid rgba(240, 171, 252, 0.3);
-  border-top-color: #f0abfc;
+  border: 2px solid rgba($fuchsia-300, 0.3);
+  border-top-color: $fuchsia-300;
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
 }

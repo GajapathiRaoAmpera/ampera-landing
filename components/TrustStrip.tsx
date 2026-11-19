@@ -5,35 +5,33 @@ import { img } from "@/lib/images";
 import { Eyebrow } from "@/components/Eyebrow";
 import { Principles } from "@/components/Principles";
 import { Reveal } from "@/components/Reveal";
+import s from "./TrustStrip.module.scss";
 
 // Microsoft has no Simple Icons glyph; its mark is four squares.
 const MicrosoftMark = () => (
-  <span aria-hidden className="grid size-7 grid-cols-2 gap-0.5">
-    <span className="bg-[#f25022]" />
-    <span className="bg-[#7fba00]" />
-    <span className="bg-[#00a4ef]" />
-    <span className="bg-[#ffb900]" />
+  <span aria-hidden className={s.msMark}>
+    <span />
+    <span />
+    <span />
+    <span />
   </span>
 );
 
 const partners = [
   { name: "Microsoft", logo: <MicrosoftMark /> },
-  { name: "Databricks", logo: <SiDatabricks aria-hidden className="size-7 text-[#ff3621]" /> },
-  { name: "Snowflake", logo: <SiSnowflake aria-hidden className="size-7 text-[#29b5e8]" /> },
+  { name: "Databricks", logo: <SiDatabricks aria-hidden className={s.databricks} /> },
+  { name: "Snowflake", logo: <SiSnowflake aria-hidden className={s.snowflake} /> },
 ];
 
-// Trust band: ISO + partners, then the delivery principles (same content as before, new UI).
+// Trust band: ISO + partners, then the delivery principles.
 export function TrustStrip({ principles }: { principles: [string, string][] }) {
   return (
-    <section
-      aria-labelledby="trust-h"
-      className="relative overflow-hidden border-b border-black/10 bg-white"
-    >
-      <div aria-hidden className="trust-glow pointer-events-none absolute inset-0" />
-      <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 lg:grid-cols-[auto_1fr] lg:gap-16">
+    <section aria-labelledby="trust-h" className={s.band}>
+      <div aria-hidden className={s.glow} />
+      <div className={s.top}>
         <Reveal>
-          <div className="flex items-center gap-5 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-black/10">
-            <div className="relative overflow-hidden rounded-lg">
+          <div className={s.iso}>
+            <div className={s.isoMark}>
               <Image
                 src={img.iso}
                 width={88}
@@ -43,17 +41,14 @@ export function TrustStrip({ principles }: { principles: [string, string][] }) {
               <span aria-hidden className="sheen" />
             </div>
             <div>
-              <p className="flex items-center gap-2 font-medium text-navy">
-                <span className="relative flex size-6 items-center justify-center">
-                  <span
-                    aria-hidden
-                    className="absolute inset-0 animate-ping rounded-full bg-purple/30 [animation-iteration-count:3]"
-                  />
-                  <LuBadgeCheck aria-hidden className="relative size-6 text-purple" />
+              <p className={s.isoTitle}>
+                <span className={s.badge}>
+                  <span aria-hidden className={s.ping} />
+                  <LuBadgeCheck aria-hidden className={s.badgeIcon} />
                 </span>
                 ISO certified
               </p>
-              <p className="mt-1 text-sm text-zinc-600">Audited by Intertek</p>
+              <p className={s.muted}>Audited by Intertek</p>
             </div>
           </div>
         </Reveal>
@@ -61,33 +56,32 @@ export function TrustStrip({ principles }: { principles: [string, string][] }) {
         <div>
           <Reveal delay={0.1}>
             <Eyebrow>Built on</Eyebrow>
-            <h2 id="trust-h" className="mt-3 text-3xl font-normal text-balance text-purple">
+            <h2 id="trust-h" className={s.heading}>
               ISO certified (Intertek) · Technology partners: Microsoft, Databricks, Snowflake
             </h2>
           </Reveal>
-          <div className="relative mt-8">
-            <svg
-              aria-hidden
-              className="absolute inset-x-0 top-1/2 hidden h-px w-full overflow-visible sm:block"
-            >
+          <div className={s.partners}>
+            <svg aria-hidden className={s.line}>
               <line
                 x1="0"
                 y1="0"
                 x2="100%"
                 y2="0"
-                className="flow stroke-purple/40"
+                className="flow"
+                stroke="#9c369a"
+                strokeOpacity={0.4}
                 strokeWidth="1.5"
               />
             </svg>
-            <ul className="relative grid gap-4 sm:grid-cols-3">
+            <ul className={s.partnerList}>
               {partners.map((p, i) => (
                 <li key={p.name}>
                   <Reveal delay={0.2 + i * 0.12}>
-                    <div className="flex items-center gap-3 rounded-2xl border border-black/10 bg-white px-5 py-4 transition duration-300 hover:border-purple/40 hover:shadow-lg hover:shadow-purple/10 motion-safe:hover:-translate-y-1">
+                    <div className={s.partner}>
                       {p.logo}
                       <div>
-                        <p className="font-medium">{p.name}</p>
-                        <p className="text-sm text-zinc-600">Technology partner</p>
+                        <p className={s.partnerName}>{p.name}</p>
+                        <p className={s.muted}>Technology partner</p>
                       </div>
                     </div>
                   </Reveal>
@@ -97,7 +91,7 @@ export function TrustStrip({ principles }: { principles: [string, string][] }) {
           </div>
         </div>
       </div>
-      <div className="relative mx-auto max-w-6xl px-4 pb-16">
+      <div className={s.principles}>
         <Principles items={principles} />
       </div>
     </section>
