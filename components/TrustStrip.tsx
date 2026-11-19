@@ -3,6 +3,7 @@ import { LuBadgeCheck } from "react-icons/lu";
 import { SiDatabricks, SiSnowflake } from "react-icons/si";
 import { img } from "@/lib/images";
 import { Eyebrow } from "@/components/Eyebrow";
+import { Principles } from "@/components/Principles";
 import { Reveal } from "@/components/Reveal";
 
 // Microsoft has no Simple Icons glyph; its mark is four squares.
@@ -21,8 +22,8 @@ const partners = [
   { name: "Snowflake", logo: <SiSnowflake aria-hidden className="size-7 text-[#29b5e8]" /> },
 ];
 
-// Trust band: ISO certification + technology partners.
-export function TrustStrip() {
+// Trust band: ISO + partners, then the delivery principles (same content as before, new UI).
+export function TrustStrip({ principles }: { principles: [string, string][] }) {
   return (
     <section
       aria-labelledby="trust-h"
@@ -61,7 +62,7 @@ export function TrustStrip() {
           <Reveal delay={0.1}>
             <Eyebrow>Built on</Eyebrow>
             <h2 id="trust-h" className="mt-3 text-3xl font-normal text-balance text-purple">
-              Certified, and built on the platforms you already run
+              ISO certified (Intertek) · Technology partners: Microsoft, Databricks, Snowflake
             </h2>
           </Reveal>
           <div className="relative mt-8">
@@ -95,6 +96,9 @@ export function TrustStrip() {
             </ul>
           </div>
         </div>
+      </div>
+      <div className="relative mx-auto max-w-6xl px-4 pb-16">
+        <Principles items={principles} />
       </div>
     </section>
   );

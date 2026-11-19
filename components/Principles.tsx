@@ -6,7 +6,7 @@ const icons = [LuSparkles, LuTarget, LuMessagesSquare, LuLayers, LuShieldCheck];
 // Delivery principles as static cards: all text visible, motion is only a one-time reveal + hover.
 export function Principles({ items }: { items: [string, string][] }) {
   return (
-    <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+    <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
       {items.map(([title, body], i) => {
         const Icon = icons[i % icons.length];
         return (
@@ -25,7 +25,7 @@ export function Principles({ items }: { items: [string, string][] }) {
                     {String(i + 1).padStart(2, "0")}
                   </span>
                 </div>
-                <h4 className="mt-5 text-lg font-medium">{title}</h4>
+                <h3 className="mt-5 text-lg font-medium">{title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-zinc-700">{body}</p>
               </div>
             </Reveal>

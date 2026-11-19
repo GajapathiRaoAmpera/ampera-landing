@@ -1,4 +1,4 @@
-// Decorative-but-readable diagrams: real text in the SVG (crawlable), animated flow lines, no stats.
+// Decorative-but-readable diagrams: real text in the SVG (crawlable), a data packet moving through, no stats.
 const FLOWS: Record<string, string[]> = {
   "/services/genai-llms": ["Documents", "Vector search", "LLM", "Answer"],
   "/services/data-science-machine-learning": ["Data", "Pipeline", "Model", "Prediction"],
@@ -21,11 +21,19 @@ export function ServiceVisual({ href }: { href: string }) {
   if (flow)
     return (
       <svg
-        viewBox="0 0 480 100"
+        viewBox="-3 0 486 100"
         role="img"
         aria-label={`Diagram: ${flow.join(" to ")}`}
         className="h-auto w-full max-w-xl"
       >
+        {/* drawn first: node boxes cover it as it passes through */}
+        <circle
+          cx={45}
+          cy={50}
+          r={5}
+          className="packet fill-purple"
+          style={{ "--dx": "390px", "--dy": "0px" } as React.CSSProperties}
+        />
         {flow.map((t, i) => (
           <g key={t}>
             <rect
@@ -35,7 +43,8 @@ export function ServiceVisual({ href }: { href: string }) {
               height={40}
               rx={20}
               strokeWidth={1.5}
-              className={box}
+              className={`${box} node-glow`}
+              style={{ animationDelay: `${(i * 3.2) / 3}s` }}
             />
             <text x={i * 130 + 45} y={50} {...label}>
               {t}
@@ -63,9 +72,9 @@ export function ServiceVisual({ href }: { href: string }) {
 
   const nodes: [number, number][] = [
     [10, 10],
-    [380, 10],
+    [366, 10],
     [10, 114],
-    [380, 114],
+    [366, 114],
   ];
   return (
     <svg
@@ -79,10 +88,26 @@ export function ServiceVisual({ href }: { href: string }) {
           key={HUB[i]}
           x1={240}
           y1={80}
-          x2={x + 45}
+          x2={x + 55}
           y2={y + 18}
           strokeWidth={2}
           className="flow stroke-navy"
+        />
+      ))}
+      {nodes.map(([x, y], i) => (
+        <circle
+          key={HUB[i]}
+          cx={240}
+          cy={80}
+          r={4.5}
+          className="packet fill-purple"
+          style={
+            {
+              "--dx": `${x + 55 - 240}px`,
+              "--dy": `${y + 18 - 80}px`,
+              animationDelay: `${i * 0.8}s`,
+            } as React.CSSProperties
+          }
         />
       ))}
       <rect x={190} y={58} width={100} height={44} rx={22} className="fill-purple" />
@@ -97,7 +122,16 @@ export function ServiceVisual({ href }: { href: string }) {
       </text>
       {nodes.map(([x, y], i) => (
         <g key={HUB[i]}>
-          <rect x={x} y={y} width={110} height={36} rx={18} strokeWidth={1.5} className={box} />
+          <rect
+            x={x}
+            y={y}
+            width={110}
+            height={36}
+            rx={18}
+            strokeWidth={1.5}
+            className={`${box} node-glow`}
+            style={{ animationDelay: `${i * 0.8 + 3.1}s` }}
+          />
           <text x={x + 55} y={y + 18} {...label}>
             {HUB[i]}
           </text>

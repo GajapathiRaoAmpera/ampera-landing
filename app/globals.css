@@ -65,6 +65,216 @@ body {
   animation: sheen 5s ease-in-out infinite;
 }
 
+/* Service diagrams (components/ServiceVisual.tsx): packet travels, nodes light up as it arrives */
+@keyframes packet {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  8%,
+  92% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy));
+    opacity: 0;
+  }
+}
+.packet {
+  animation: packet 3.2s linear infinite;
+}
+@keyframes node-glow {
+  0% {
+    fill: #f6e3f6;
+  }
+  18%,
+  100% {
+    fill: #fff;
+  }
+}
+.node-glow {
+  animation: node-glow 3.2s ease-out infinite;
+}
+
+/* Card art (components/CardArt.tsx) + card hover */
+@keyframes node-pulse {
+  50% {
+    transform: scale(1.8);
+    opacity: 0.5;
+  }
+}
+.node-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: node-pulse 2.4s ease-in-out infinite;
+}
+.card-lift {
+  transition:
+    translate 0.3s,
+    box-shadow 0.3s;
+}
+.card-lift:hover {
+  box-shadow: 0 18px 40px -18px rgb(156 54 154 / 0.35);
+}
+.group:hover .card-art-icon {
+  scale: 1.08;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .card-lift:hover {
+    translate: 0 -4px;
+  }
+}
+
+/* Stack layers rail (components/StackLayers.tsx): data dots climb L1 -> L4; hidden when motion is reduced */
+@keyframes rail-flow {
+  0% {
+    top: 100%;
+    opacity: 0;
+  }
+  12%,
+  88% {
+    opacity: 1;
+  }
+  100% {
+    top: 0%;
+    opacity: 0;
+  }
+}
+.rail-flow {
+  opacity: 0;
+  animation: rail-flow 3.3s linear infinite;
+}
+
+/* Accelerator scenes (components/AcceleratorArt.tsx). Reduced motion: each ends in its "done" state. */
+@keyframes seq {
+  0%,
+  6% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  14%,
+  80% {
+    opacity: 1;
+    transform: none;
+  }
+  92%,
+  100% {
+    opacity: 0;
+  }
+}
+.seq {
+  animation: seq 6s ease-out infinite;
+}
+@keyframes blip {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  8% {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+  20% {
+    transform: scale(1);
+  }
+  60%,
+  100% {
+    opacity: 0;
+  }
+}
+.blip {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: blip 4s ease-out infinite;
+}
+.sweep {
+  animation: spin 4s linear infinite;
+}
+.blink {
+  animation: blink 1.2s ease-in-out infinite;
+}
+@keyframes draw {
+  0% {
+    stroke-dashoffset: 1;
+    opacity: 1;
+  }
+  45%,
+  85% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+.draw {
+  stroke-dasharray: 1;
+  animation: draw 5s ease-in-out infinite;
+}
+@keyframes hop {
+  0%,
+  20% {
+    transform: translate(0, 0);
+  }
+  25%,
+  45% {
+    transform: translate(var(--x1), var(--y1));
+  }
+  50%,
+  70% {
+    transform: translate(var(--x2), var(--y2));
+  }
+  75%,
+  95% {
+    transform: translate(var(--x3), var(--y3));
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+.hop {
+  animation: hop 6s cubic-bezier(0.6, 0, 0.3, 1) infinite;
+}
+@keyframes fix-a {
+  0%,
+  8% {
+    opacity: 0;
+  }
+  14%,
+  40% {
+    opacity: 1;
+  }
+  46%,
+  100% {
+    opacity: 0;
+  }
+}
+.fix-a {
+  opacity: 0;
+  animation: fix-a 6s infinite;
+}
+@keyframes fix-b {
+  0%,
+  42% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  50%,
+  90% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.fix-b {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: fix-b 6s infinite;
+}
+
 /* Blueprint grid behind the dark hero (static: motion is reserved for the content) */
 .blueprint {
   background-image:

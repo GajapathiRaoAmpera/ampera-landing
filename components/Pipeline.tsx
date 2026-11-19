@@ -1,6 +1,9 @@
 "use client";
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { LuPlug, LuRocket, LuShieldCheck, LuWorkflow } from "react-icons/lu";
+
+const ICONS = [LuPlug, LuWorkflow, LuShieldCheck, LuRocket];
 
 // Connect → Compose → Govern → Operate. The rail fills as you scroll; each step lights up in turn.
 export function Pipeline({ steps }: { steps: string[][] }) {
@@ -46,19 +49,28 @@ function Step({
   children: React.ReactNode;
 }) {
   const at = i / (n - 1);
+  const Icon = ICONS[i % ICONS.length];
   const dot = useTransform(p, [Math.max(at - 0.05, 0), at], ["#ffffff", "#9c369a"]);
   const lift = useTransform(p, [Math.max(at - 0.2, 0), at], [0.45, 1]);
   return (
-    <li>
+    <li className="flex flex-col">
       <motion.span
         aria-hidden
         className="relative z-10 mb-4 block size-4 rounded-full border-2 border-purple"
         style={{ backgroundColor: reduce ? "#9c369a" : dot }}
       />
-      <motion.div style={{ opacity: reduce ? 1 : lift }}>
-        <p className="font-mono text-sm text-navy">0{i + 1}</p>
-        <h3 className="mt-1 text-2xl font-medium text-purple">{title}</h3>
-        <p className="mt-2">{children}</p>
+      <motion.div
+        style={{ opacity: reduce ? 1 : lift }}
+        className="card-lift group flex-1 rounded-2xl border border-black/10 bg-ivory p-5"
+      >
+        <div className="flex items-center justify-between">
+          <span className="grid size-11 place-items-center rounded-xl bg-purple/10 text-purple transition-colors duration-300 group-hover:bg-purple group-hover:text-white">
+            <Icon aria-hidden className="size-5" />
+          </span>
+          <p className="font-mono text-sm text-navy">0{i + 1}</p>
+        </div>
+        <h3 className="mt-4 text-2xl font-medium text-purple">{title}</h3>
+        <p className="mt-2 text-zinc-700">{children}</p>
       </motion.div>
     </li>
   );
