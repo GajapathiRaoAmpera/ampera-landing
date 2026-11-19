@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { LuArrowDown } from "react-icons/lu";
 import { coverFor, headshot, img } from "@/lib/images";
 import { HeroBio } from "@/components/HeroBio";
 import { HeroLine } from "@/components/HeroLine";
@@ -64,10 +65,7 @@ export default function Home() {
           href="#hero"
           className="relative mt-auto mb-8 inline-flex min-h-11 items-center gap-2 rounded-pill border border-white/40 px-5 text-sm hover:bg-white/10"
         >
-          See what we build{" "}
-          <span aria-hidden className="scroll-cue">
-            ↓
-          </span>
+          See what we build <LuArrowDown aria-hidden className="scroll-cue size-4" />
         </a>
       </section>
 

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LuArrowUpRight } from "react-icons/lu";
 
 type Props = {
   href: string;
@@ -24,7 +25,7 @@ export function Button({ href, children, variant = "primary", dark }: Props) {
           aria-hidden
           className="grid size-7 place-items-center rounded-full bg-white text-purple"
         >
-          ↗
+          <LuArrowUpRight className="size-4" />
         </span>
       )}
     </Link>

@@ -1,7 +1,15 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { agents, type Status } from "@/lib/console";
-import { MediaIcon } from "./MediaIcon";
+import {
+  LuCheck,
+  LuCircle,
+  LuCircleCheck,
+  LuPause,
+  LuPlay,
+  LuRotateCcw,
+  LuUser,
+} from "react-icons/lu";
 
 const LABEL: Record<Status, string> = {
   done: "Done",
@@ -175,7 +183,13 @@ export function AgentConsole() {
             title={finished ? "Replay example" : playing ? "Pause animation" : "Play animation"}
             className="ml-auto grid size-11 place-items-center rounded-full text-zinc-300 hover:bg-white/10 hover:text-white"
           >
-            <MediaIcon kind={finished ? "replay" : playing ? "pause" : "play"} />
+            {finished ? (
+              <LuRotateCcw className="size-4" />
+            ) : playing ? (
+              <LuPause className="size-4" />
+            ) : (
+              <LuPlay className="size-4" />
+            )}
           </button>
         )}
       </div>
@@ -223,7 +237,13 @@ export function AgentConsole() {
                         <span className="spinner" />
                       ) : (
                         <span key={st} className={`pop ${COLOR[st]}`}>
-                          {st === "done" ? "✓" : st === "approval" ? "◐" : "○"}
+                          {st === "done" ? (
+                            <LuCheck className="size-4" />
+                          ) : st === "approval" ? (
+                            <LuUser className="size-4" />
+                          ) : (
+                            <LuCircle className="size-3" />
+                          )}
                         </span>
                       )}
                     </span>
@@ -235,7 +255,8 @@ export function AgentConsole() {
             </ol>
             {isActive && finished && (
               <p className="line-in mt-5 rounded-lg border border-emerald-300/40 bg-emerald-300/10 px-3 py-2 text-sm text-emerald-200">
-                ✓ Finished, with a person approving the key step.
+                <LuCircleCheck aria-hidden className="mr-2 inline size-4 align-[-3px]" />
+                Finished, with a person approving the key step.
               </p>
             )}
           </div>

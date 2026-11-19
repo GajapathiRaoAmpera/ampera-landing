@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { MediaIcon } from "./MediaIcon";
+import { LuDiamond, LuPause, LuPlay } from "react-icons/lu";
 
 // Slow proof-point ticker. Real text, pausable (WCAG 2.2.2); static when motion is reduced.
 export function Marquee({ items }: { items: string[] }) {
@@ -9,9 +9,10 @@ export function Marquee({ items }: { items: string[] }) {
     <ul aria-hidden={hidden || undefined} className="flex shrink-0 gap-10 pr-10">
       {items.map((t) => (
         <li key={t} className="whitespace-nowrap font-mono text-sm uppercase tracking-widest">
-          <span aria-hidden className="mr-3 text-purple">
-            ◆
-          </span>
+          <LuDiamond
+            aria-hidden
+            className="mr-3 inline size-3 fill-current align-baseline text-purple"
+          />
           {t}
         </li>
       ))}
@@ -32,7 +33,7 @@ export function Marquee({ items }: { items: string[] }) {
         title={paused ? "Play" : "Pause"}
         className="grid size-11 shrink-0 place-items-center rounded-full text-navy hover:bg-navy/5"
       >
-        <MediaIcon kind={paused ? "play" : "pause"} />
+        {paused ? <LuPlay className="size-4" /> : <LuPause className="size-4" />}
       </button>
     </div>
   );
