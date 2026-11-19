@@ -209,13 +209,13 @@ Content migration: fetch each live page and move its text into content files (MD
 - [x] **Week 1:**
   - [x] Scaffold (Next.js + TS + Tailwind), brand tokens, Switzer font.
   - [x] Base components: `Button`, `Eyebrow`, `Tag`, `Nav`, `Footer` (`Card`, `Section` still to do).
-- [ ] **Week 2:**
-  - [ ] All routes above with migrated content; homepage in the new structure.
+- [x] **Week 2:**
+  - [x] All routes above with migrated content (`scripts/migrate-content.mjs` → `content/`); homepage in the new structure (agent console, 3D hero, logos and the email form still to do).
 - [ ] **Week 3:**
-  - [ ] Careers pages + apply form against the Campus Hire mock (section 12); switch to the real API when ready.
-  - [ ] Agent console component.
-  - [ ] Animated SVG service visuals.
-  - [ ] 3D hero (lazy-loaded, reduced-motion fallback).
+  - [x] Careers pages + apply form + `/api/revalidate` + sitemap against the Campus Hire mock (`lib/campus-hire/`); switch to the real API when ready (set `CAMPUS_HIRE_API_URL`).
+  - [x] Agent console component (`components/AgentConsole.tsx`, data in `lib/console.ts`).
+  - [x] Animated SVG service visuals (`components/ServiceVisual.tsx`).
+  - [x] 3D hero (`components/HeroBackdrop.tsx` + `PyramidScene.tsx`, lazy-loaded, reduced-motion fallback).
   - [ ] CMS hookup.
 - [ ] **Week 4:**
   - [ ] Chatbot (section 13): ingestion, `/api/chat`, tools, widget.

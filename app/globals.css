@@ -32,3 +32,13 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+@keyframes flow {
+  to {
+    stroke-dashoffset: -16;
+  }
+}
+.flow {
+  stroke-dasharray: 5 3;
+  animation: flow 1s linear infinite;
+}

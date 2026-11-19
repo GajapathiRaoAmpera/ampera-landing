@@ -3,6 +3,7 @@ export const site = {
   url: "https://amperatech.ai",
   email: "contact@amperatech.ai",
   linkedin: "https://www.linkedin.com/company/ampera-technologies-inc",
+  consentVersion: "2026-11-v1", // TODO: final wording needs legal review (06-open-roles.md §10)
   description:
     "Ampera builds production-grade AI agents, data platforms and accessible digital experiences.",
 };
