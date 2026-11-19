@@ -73,7 +73,7 @@ export default async function ContentPage({ params }: Props) {
   const page = getPage(toPath((await params).slug));
   if (!page) notFound();
   return (
-    <article className="mx-auto max-w-6xl px-4 py-16">
+    <article className="mx-auto max-w-6xl px-4 pb-16 pt-28">
       {page.path.startsWith("/services/") ? (
         <>
           <Prose>{page.body.split("\n\n").slice(0, 2).join("\n\n")}</Prose>

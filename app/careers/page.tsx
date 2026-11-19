@@ -22,7 +22,7 @@ export default async function Careers() {
     failed = true;
   }
   return (
-    <div className="mx-auto max-w-6xl px-4 py-16">
+    <div className="mx-auto max-w-6xl px-4 pb-16 pt-28">
       <Eyebrow>Careers</Eyebrow>
       <h1 className="mt-4 text-4xl font-light text-purple sm:text-5xl">Open roles</h1>
       {failed ? (

@@ -82,7 +82,7 @@ export default async function Opening({ params }: Props) {
   const o = await getOpening((await params).slug);
   if (!o) notFound(); // closed jobs must 404 so they drop out of Google
   return (
-    <div className="mx-auto grid max-w-6xl gap-12 px-4 py-16 lg:grid-cols-[3fr_2fr]">
+    <div className="mx-auto grid max-w-6xl gap-12 px-4 pb-16 pt-28 lg:grid-cols-[3fr_2fr]">
       <article>
         <h1 className="text-4xl font-light text-purple sm:text-5xl">{o.title}</h1>
         <p className="mt-3 text-lg text-navy">{meta(o).join(" · ")}</p>

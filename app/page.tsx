@@ -45,7 +45,7 @@ export default function Home() {
       <section className="relative overflow-hidden bg-ink text-white">
         <div aria-hidden className="blueprint pointer-events-none absolute inset-0" />
         <HeroBackdrop />
-        <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 py-24 lg:grid-cols-[1fr_1fr]">
+        <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 pb-24 pt-40 lg:grid-cols-[1fr_1fr]">
           <div>
             <Eyebrow dark>Advanced AI data intelligence</Eyebrow>
             <h1 className="mt-6 max-w-3xl text-5xl font-light leading-tight sm:text-6xl">
